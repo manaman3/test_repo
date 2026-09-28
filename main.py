@@ -35,7 +35,7 @@ from maxapi.types import (
 from maxapi.types.command import BotCommand
 from maxapi.utils.inline_keyboard import InlineKeyboardBuilder
 from maxapi.methods.set_commands import SetCommands
-from sm_2 import Scheduler, Card
+# from sm_2 import Scheduler, Card
 
 
 print("123")
@@ -631,27 +631,27 @@ async def practice_callback_word(event: MessageCallback, context: MemoryContext)
 
 
 
-# ──────────────────────────────────────────────
-# HTTP-обработчик входящих обновлений от MAX
-# ──────────────────────────────────────────────
-async def handle_webhook(request: web.Request) -> web.Response:
-    # Проверка секрета (если задан)
-    if WEBHOOK_SECRET:
-        if request.headers.get("X-Max-Secret") != WEBHOOK_SECRET:
-            return web.Response(status=403)
+# # ──────────────────────────────────────────────
+# # HTTP-обработчик входящих обновлений от MAX
+# # ──────────────────────────────────────────────
+# async def handle_webhook(request: web.Request) -> web.Response:
+#     # Проверка секрета (если задан)
+#     if WEBHOOK_SECRET:
+#         if request.headers.get("X-Max-Secret") != WEBHOOK_SECRET:
+#             return web.Response(status=403)
 
-    try:
-        event_json = await request.json()
-    except Exception:
-        return web.Response(status=400)
+#     try:
+#         event_json = await request.json()
+#     except Exception:
+#         return web.Response(status=400)
 
-    # Передаём событие в диспетчер — он вызовет нужный хендлер
-    await dp.process_update_webhook(event_json, bot)
-    return web.Response(status=200)
+#     # Передаём событие в диспетчер — он вызовет нужный хендлер
+#     await dp.process_update_webhook(event_json, bot)
+#     return web.Response(status=200)
 
 
-async def healthcheck(_: web.Request) -> web.Response:
-    return web.Response(text="ok")
+# async def healthcheck(_: web.Request) -> web.Response:
+#     return web.Response(text="ok")
 
 
 
@@ -670,38 +670,46 @@ async def main() -> None:
     setter = SetCommands(bot, commands=commands_to_set)
     await setter.fetch()
 
-    # 2. Поднимаем aiohttp-сервер
-    app = web.Application()
-    app.router.add_post("/webhook", handle_webhook)
-    app.router.add_get("/health", healthcheck)
+    # # 2. Поднимаем aiohttp-сервер
+    # app = web.Application()
+    # app.router.add_post("/webhook", handle_webhook)
+    # app.router.add_get("/health", healthcheck)
 
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, HOST, PORT)
-    await site.start()
+    # runner = web.AppRunner(app)
+    # await runner.setup()
+    # site = web.TCPSite(runner, HOST, PORT)
+    # await site.start()
 
-    print(f"🌐 Webhook-сервер запущен на http://{HOST}:{PORT}/webhook")
+    # print(f"🌐 Webhook-сервер запущен на http://{HOST}:{PORT}/webhook")
 
-    # 3. Сообщаем MAX, куда слать обновления
-    #    (в некоторых версиях maxapi метод может называться set_webhook / subscribe_webhook)
-    try:
-        await bot.set_webhook(url=WEBHOOK_URL)
-        print(f"✅ Webhook зарегистрирован: {WEBHOOK_URL}")
-    except AttributeError:
-        print("⚠️ Метод set_webhook не найден — зарегистрируйте URL через API MAX вручную.")
-    except Exception as e:
-        print(f"⚠️ Не удалось установить webhook: {e}")
+    # # 3. Сообщаем MAX, куда слать обновления
+    # #    (в некоторых версиях maxapi метод может называться set_webhook / subscribe_webhook)
+    # try:
+    #     await bot.set_webhook(url=WEBHOOK_URL)
+    #     print(f"✅ Webhook зарегистрирован: {WEBHOOK_URL}")
+    # except AttributeError:
+    #     print("⚠️ Метод set_webhook не найден — зарегистрируйте URL через API MAX вручную.")
+    # except Exception as e:
+    #     print(f"⚠️ Не удалось установить webhook: {e}")
 
-    # 4. Держим процесс живым
-    try:
-        await asyncio.Event().wait()
-    finally:
-        await runner.cleanup()
-
-
+    # # 4. Держим процесс живым
+    # try:
+    #     await asyncio.Event().wait()
+    # finally:
+    #     await runner.cleanup()
 
 
- 
+
+
+# async def main():
+    # Запускает FastAPI-сервер на 0.0.0.0:8080
+    await dp.handle_webhook(
+        bot=bot,
+        host='0.0.0.0',
+        port=8080,
+    )
+
+
 
 
 if __name__ == '__main__':
