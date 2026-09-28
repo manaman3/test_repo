@@ -128,12 +128,12 @@ WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET", "")
 
 # model_path = "./whisper_model"
 # Загружаем модель один раз при старте (можно вынести в отдельный поток)
-model = WhisperModel(
-    "tiny",#"large-v3",           # или "turbo", "medium" — зависит от железа
-    device="cpu",        # или "cpu"
-    compute_type="int8" # или "int8" для CPU
-#    download_root=model_path
-)
+# model = WhisperModel(
+#     "tiny",#"large-v3",           # или "turbo", "medium" — зависит от железа
+#     device="cpu",        # или "cpu"
+#     compute_type="int8" # или "int8" для CPU
+# #    download_root=model_path
+# )
 
 
 async def download_voice_to_memory(attachment: Audio) -> io.BytesIO:
