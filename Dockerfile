@@ -13,4 +13,4 @@ COPY . .
 # Если через webhook — раскомментируйте и укажите порт.
 # EXPOSE 8000
 
-CMD ["python", "bot.py"]
+CMD ["python", "main.py"]
