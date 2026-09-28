@@ -525,33 +525,33 @@ async def practice_callback_word(event: MessageCallback, context: MemoryContext)
 
 
 
-@dp.message_created(F.message.attachments)
-async def handle_voice(event: MessageCreated):
+# @dp.message_created(F.message.attachments)
+# async def handle_voice(event: MessageCreated):
 
-    print("qqqqqqqqqq")
-    for attachment in event.message.attachments:
-        if not isinstance(attachment, Audio):
-            continue
+#     print("qqqqqqqqqq")
+#     for attachment in event.message.attachments:
+#         if not isinstance(attachment, Audio):
+#             continue
 
-        # 1. Скачиваем в память
-        audio_buffer = await download_voice_to_memory(attachment)
+#         # 1. Скачиваем в память
+#         audio_buffer = await download_voice_to_memory(attachment)
 
-        # 2. Транскрибируем напрямую из BytesIO
-        # faster-whisper умеет работать с file-like объектами
-        segments, info = model.transcribe(
-            audio_buffer,
-            language="eu",          # можно не указывать — авто-детект
-            beam_size=5,
-            vad_filter=True,        # отсекает тишину
-            vad_parameters=dict(min_silence_duration_ms=500)
-        )
+#         # 2. Транскрибируем напрямую из BytesIO
+#         # faster-whisper умеет работать с file-like объектами
+#         segments, info = model.transcribe(
+#             audio_buffer,
+#             language="eu",          # можно не указывать — авто-детект
+#             beam_size=5,
+#             vad_filter=True,        # отсекает тишину
+#             vad_parameters=dict(min_silence_duration_ms=500)
+#         )
 
-        text = "".join(segment.text for segment in segments).strip()
+#         text = "".join(segment.text for segment in segments).strip()
 
-        await event.message.answer(f"📝 Распознанный текст:\n\n{text}")
-        return
+#         await event.message.answer(f"📝 Распознанный текст:\n\n{text}")
+#         return
 
-    await event.message.answer("Пожалуйста, отправьте голосовое сообщение.")
+#     await event.message.answer("Пожалуйста, отправьте голосовое сообщение.")
 
 
 
