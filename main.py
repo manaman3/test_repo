@@ -98,13 +98,13 @@ if not TOKEN:
 
 
 
-model_path = "./whisper_model"
+# model_path = "./whisper_model"
 # Загружаем модель один раз при старте (можно вынести в отдельный поток)
 model = WhisperModel(
     "large-v3",           # или "turbo", "medium" — зависит от железа
     device="cpu",        # или "cpu"
     compute_type="int8", # или "int8" для CPU
-    download_root=model_path
+#    download_root=model_path
 )
 
 
