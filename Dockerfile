@@ -11,6 +11,6 @@ COPY . .
 
 # Если бот работает через long polling, EXPOSE не нужен.
 # Если через webhook — раскомментируйте и укажите порт.
-# EXPOSE 8000
+ EXPOSE 8080
 
 CMD ["python", "main.py"]

@@ -4,5 +4,5 @@ services:
     env_file:
       - .env
     restart: unless-stopped
-    # ports:
-    #   - "8000:8000"   # только если webhook
+    ports:
+      - "8080:8080"   # только если webhook
