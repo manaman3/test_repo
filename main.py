@@ -96,7 +96,7 @@ if not TOKEN:
     raise RuntimeError("MAX_BOT_TOKEN не задан")
 
 
-
+# цау цау
 
 # model_path = "./whisper_model"
 # Загружаем модель один раз при старте (можно вынести в отдельный поток)
