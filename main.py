@@ -180,11 +180,11 @@ def random_words(n: int = 5, path: str = "words.json") -> list[dict]:
 
 w = random_word()
 
-
+print("ttt")
 logging.basicConfig(level=logging.INFO)
 bot = Bot(TOKEN)
 dp = Dispatcher()
-
+print("sss")
 
 class SchoolPayload(CallbackPayload, prefix="schoolpayload"):
     foo: str
