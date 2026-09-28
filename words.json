@@ -1,0 +1,602 @@
+[
+  {
+    "word": "algorithm",
+    "translation": "алгоритм",
+    "transcription": "/ˈæl.ɡə.rɪ.ðəm/",
+    "sentence": "The algorithm sorts the list quickly."
+  },
+  {
+    "word": "application",
+    "translation": "приложение",
+    "transcription": "/ˌæp.lɪˈkeɪ.ʃən/",
+    "sentence": "This application runs on Windows."
+  },
+  {
+    "word": "array",
+    "translation": "массив",
+    "transcription": "/əˈreɪ/",
+    "sentence": "We store the numbers in an array."
+  },
+  {
+    "word": "automation",
+    "translation": "автоматизация",
+    "transcription": "/ˌɔː.təˈmeɪ.ʃən/",
+    "sentence": "Automation reduces manual work."
+  },
+  {
+    "word": "bandwidth",
+    "translation": "пропускная способность",
+    "transcription": "/ˈbænd.wɪdθ/",
+    "sentence": "The network has enough bandwidth."
+  },
+  {
+    "word": "binary",
+    "translation": "двоичный",
+    "transcription": "/ˈbaɪ.nər.i/",
+    "sentence": "Computers use binary code."
+  },
+  {
+    "word": "bit",
+    "translation": "бит",
+    "transcription": "/bɪt/",
+    "sentence": "A bit is the smallest unit of data."
+  },
+  {
+    "word": "byte",
+    "translation": "байт",
+    "transcription": "/baɪt/",
+    "sentence": "One byte contains eight bits."
+  },
+  {
+    "word": "cache",
+    "translation": "кэш",
+    "transcription": "/kæʃ/",
+    "sentence": "The cache speeds up data access."
+  },
+  {
+    "word": "cloud",
+    "translation": "облако",
+    "transcription": "/klaʊd/",
+    "sentence": "We store backups in the cloud."
+  },
+  {
+    "word": "cluster",
+    "translation": "кластер",
+    "transcription": "/ˈklʌs.tər/",
+    "sentence": "The server cluster handles high traffic."
+  },
+  {
+    "word": "code",
+    "translation": "код",
+    "transcription": "/kəʊd/",
+    "sentence": "She writes clean code."
+  },
+  {
+    "word": "compiler",
+    "translation": "компилятор",
+    "transcription": "/kəmˈpaɪ.lər/",
+    "sentence": "The compiler translates source code into machine code."
+  },
+  {
+    "word": "computation",
+    "translation": "вычисление",
+    "transcription": "/ˌkɒm.pjʊˈteɪ.ʃən/",
+    "sentence": "This computation takes a few seconds."
+  },
+  {
+    "word": "computer",
+    "translation": "компьютер",
+    "transcription": "/kəmˈpjuː.tər/",
+    "sentence": "My computer needs an update."
+  },
+  {
+    "word": "cybersecurity",
+    "translation": "кибербезопасность",
+    "transcription": "/ˌsaɪ.bə.sɪˈkjʊə.rə.ti/",
+    "sentence": "Cybersecurity protects systems from attacks."
+  },
+  {
+    "word": "data",
+    "translation": "данные",
+    "transcription": "/ˈdeɪ.tə/",
+    "sentence": "The data is stored on a secure server."
+  },
+  {
+    "word": "database",
+    "translation": "база данных",
+    "transcription": "/ˈdeɪ.tə.beɪs/",
+    "sentence": "The database contains user records."
+  },
+  {
+    "word": "debug",
+    "translation": "отлаживать",
+    "transcription": "/ˌdiːˈbʌɡ/",
+    "sentence": "I need to debug this program."
+  },
+  {
+    "word": "device",
+    "translation": "устройство",
+    "transcription": "/dɪˈvaɪs/",
+    "sentence": "This device connects to Wi-Fi."
+  },
+  {
+    "word": "digital",
+    "translation": "цифровой",
+    "transcription": "/ˈdɪdʒ.ɪ.təl/",
+    "sentence": "We live in a digital world."
+  },
+  {
+    "word": "encryption",
+    "translation": "шифрование",
+    "transcription": "/ɪnˈkrɪp.ʃən/",
+    "sentence": "Encryption keeps messages private."
+  },
+  {
+    "word": "engineer",
+    "translation": "инженер",
+    "transcription": "/ˌen.dʒɪˈnɪər/",
+    "sentence": "She works as a software engineer."
+  },
+  {
+    "word": "file",
+    "translation": "файл",
+    "transcription": "/faɪl/",
+    "sentence": "Please save the file before closing."
+  },
+  {
+    "word": "firewall",
+    "translation": "межсетевой экран",
+    "transcription": "/ˈfaɪə.wɔːl/",
+    "sentence": "The firewall blocks suspicious traffic."
+  },
+  {
+    "word": "framework",
+    "translation": "фреймворк",
+    "transcription": "/ˈfreɪm.wɜːk/",
+    "sentence": "We use a popular web framework."
+  },
+  {
+    "word": "function",
+    "translation": "функция",
+    "transcription": "/ˈfʌŋk.ʃən/",
+    "sentence": "This function returns a boolean value."
+  },
+  {
+    "word": "hardware",
+    "translation": "аппаратное обеспечение",
+    "transcription": "/ˈhɑːd.weər/",
+    "sentence": "The hardware is outdated."
+  },
+  {
+    "word": "interface",
+    "translation": "интерфейс",
+    "transcription": "/ˈɪn.tə.feɪs/",
+    "sentence": "The user interface is easy to use."
+  },
+  {
+    "word": "internet",
+    "translation": "интернет",
+    "transcription": "/ˈɪn.tə.net/",
+    "sentence": "The internet connects millions of devices."
+  },
+  {
+    "word": "kernel",
+    "translation": "ядро",
+    "transcription": "/ˈkɜː.nəl/",
+    "sentence": "The kernel manages system resources."
+  },
+  {
+    "word": "laptop",
+    "translation": "ноутбук",
+    "transcription": "/ˈlæp.tɒp/",
+    "sentence": "I take my laptop to every lecture."
+  },
+  {
+    "word": "library",
+    "translation": "библиотека",
+    "transcription": "/ˈlaɪ.brər.i/",
+    "sentence": "This library provides useful functions."
+  },
+  {
+    "word": "loop",
+    "translation": "цикл",
+    "transcription": "/luːp/",
+    "sentence": "The loop repeats ten times."
+  },
+  {
+    "word": "machine",
+    "translation": "машина",
+    "transcription": "/məˈʃiːn/",
+    "sentence": "The machine learning model predicts prices."
+  },
+  {
+    "word": "memory",
+    "translation": "память",
+    "transcription": "/ˈmem.ər.i/",
+    "sentence": "The program uses too much memory."
+  },
+  {
+    "word": "module",
+    "translation": "модуль",
+    "transcription": "/ˈmɒd.juːl/",
+    "sentence": "Each module has a specific task."
+  },
+  {
+    "word": "network",
+    "translation": "сеть",
+    "transcription": "/ˈnet.wɜːk/",
+    "sentence": "The university network is very fast."
+  },
+  {
+    "word": "operating",
+    "translation": "операционный",
+    "transcription": "/ˈɒp.ər.eɪ.tɪŋ/",
+    "sentence": "The operating system controls the hardware."
+  },
+  {
+    "word": "packet",
+    "translation": "пакет",
+    "transcription": "/ˈpæk.ɪt/",
+    "sentence": "A packet travels across the network."
+  },
+  {
+    "word": "password",
+    "translation": "пароль",
+    "transcription": "/ˈpɑːs.wɜːd/",
+    "sentence": "Choose a strong password."
+  },
+  {
+    "word": "platform",
+    "translation": "платформа",
+    "transcription": "/ˈplæt.fɔːm/",
+    "sentence": "The platform supports many programming languages."
+  },
+  {
+    "word": "program",
+    "translation": "программа",
+    "transcription": "/ˈprəʊ.ɡræm/",
+    "sentence": "This program solves mathematical equations."
+  },
+  {
+    "word": "protocol",
+    "translation": "протокол",
+    "transcription": "/ˈprəʊ.tə.kɒl/",
+    "sentence": "HTTP is a common network protocol."
+  },
+  {
+    "word": "query",
+    "translation": "запрос",
+    "transcription": "/ˈkwɪə.ri/",
+    "sentence": "The query returns all students."
+  },
+  {
+    "word": "recursion",
+    "translation": "рекурсия",
+    "transcription": "/rɪˈkɜː.ʒən/",
+    "sentence": "Recursion can simplify complex problems."
+  },
+  {
+    "word": "repository",
+    "translation": "репозиторий",
+    "transcription": "/rɪˈpɒz.ɪ.tər.i/",
+    "sentence": "We pushed the code to the repository."
+  },
+  {
+    "word": "robot",
+    "translation": "робот",
+    "transcription": "/ˈrəʊ.bɒt/",
+    "sentence": "The robot can move autonomously."
+  },
+  {
+    "word": "router",
+    "translation": "маршрутизатор",
+    "transcription": "/ˈruː.tər/",
+    "sentence": "The router connects us to the internet."
+  },
+  {
+    "word": "server",
+    "translation": "сервер",
+    "transcription": "/ˈsɜː.vər/",
+    "sentence": "The server is down for maintenance."
+  },
+  {
+    "word": "software",
+    "translation": "программное обеспечение",
+    "transcription": "/ˈsɒft.weər/",
+    "sentence": "We need to install new software."
+  },
+  {
+    "word": "source",
+    "translation": "исходный код",
+    "transcription": "/sɔːs/",
+    "sentence": "The source code is available online."
+  },
+  {
+    "word": "storage",
+    "translation": "хранилище",
+    "transcription": "/ˈstɔː.rɪdʒ/",
+    "sentence": "Cloud storage is convenient."
+  },
+  {
+    "word": "syntax",
+    "translation": "синтаксис",
+    "transcription": "/ˈsɪn.tæks/",
+    "sentence": "Python syntax is easy to read."
+  },
+  {
+    "word": "system",
+    "translation": "система",
+    "transcription": "/ˈsɪs.təm/",
+    "sentence": "The system crashed unexpectedly."
+  },
+  {
+    "word": "technology",
+    "translation": "технология",
+    "transcription": "/tekˈnɒl.ə.dʒi/",
+    "sentence": "Technology changes very quickly."
+  },
+  {
+    "word": "variable",
+    "translation": "переменная",
+    "transcription": "/ˈveə.ri.ə.bəl/",
+    "sentence": "Declare a variable before using it."
+  },
+  {
+    "word": "virtual",
+    "translation": "виртуальный",
+    "transcription": "/ˈvɜː.tʃu.əl/",
+    "sentence": "We created a virtual machine."
+  },
+  {
+    "word": "website",
+    "translation": "веб-сайт",
+    "transcription": "/ˈweb.saɪt/",
+    "sentence": "The website loads slowly."
+  },
+  {
+    "word": "wireless",
+    "translation": "беспроводной",
+    "transcription": "/ˈwaɪə.ləs/",
+    "sentence": "The wireless connection is unstable."
+  },
+  {
+    "word": "abstraction",
+    "translation": "абстракция",
+    "transcription": "/æbˈstræk.ʃən/",
+    "sentence": "Abstraction hides complex details."
+  },
+  {
+    "word": "access",
+    "translation": "доступ",
+    "transcription": "/ˈæk.ses/",
+    "sentence": "Only administrators have access to this folder."
+  },
+  {
+    "word": "address",
+    "translation": "адрес",
+    "transcription": "/əˈdres/",
+    "sentence": "Each device has a unique IP address."
+  },
+  {
+    "word": "administrator",
+    "translation": "администратор",
+    "transcription": "/ədˈmɪn.ɪ.streɪ.tər/",
+    "sentence": "The administrator can reset your password."
+  },
+  {
+    "word": "analytics",
+    "translation": "аналитика",
+    "transcription": "/ˌæn.əˈlɪt.ɪks/",
+    "sentence": "Data analytics helps us understand users."
+  },
+  {
+    "word": "annotation",
+    "translation": "аннотация",
+    "transcription": "/ˌæn.əˈteɪ.ʃən/",
+    "sentence": "The code contains helpful annotations."
+  },
+  {
+    "word": "architecture",
+    "translation": "архитектура",
+    "transcription": "/ˈɑː.kɪ.tek.tʃər/",
+    "sentence": "The software architecture is well designed."
+  },
+  {
+    "word": "argument",
+    "translation": "аргумент",
+    "transcription": "/ˈɑː.ɡjə.mənt/",
+    "sentence": "The function takes two arguments."
+  },
+  {
+    "word": "assembly",
+    "translation": "ассемблер",
+    "transcription": "/əˈsem.bli/",
+    "sentence": "Assembly language is close to machine code."
+  },
+  {
+    "word": "attribute",
+    "translation": "атрибут",
+    "transcription": "/ˈæt.rɪ.bjuːt/",
+    "sentence": "Each object has several attributes."
+  },
+  {
+    "word": "authentication",
+    "translation": "аутентификация",
+    "transcription": "/ɔːˌθen.tɪˈkeɪ.ʃən/",
+    "sentence": "Two-factor authentication improves security."
+  },
+  {
+    "word": "backup",
+    "translation": "резервная копия",
+    "transcription": "/ˈbæk.ʌp/",
+    "sentence": "Always make a backup of your data."
+  },
+  {
+    "word": "benchmark",
+    "translation": "тест производительности",
+    "transcription": "/ˈbentʃ.mɑːk/",
+    "sentence": "The benchmark measures CPU speed."
+  },
+  {
+    "word": "boolean",
+    "translation": "логический",
+    "transcription": "/ˈbuː.li.ən/",
+    "sentence": "The boolean variable is either true or false."
+  },
+  {
+    "word": "branch",
+    "translation": "ветка",
+    "transcription": "/brɑːntʃ/",
+    "sentence": "Create a new branch for your feature."
+  },
+  {
+    "word": "browser",
+    "translation": "браузер",
+    "transcription": "/ˈbraʊ.zər/",
+    "sentence": "Open the link in your browser."
+  },
+  {
+    "word": "bug",
+    "translation": "ошибка",
+    "transcription": "/bʌɡ/",
+    "sentence": "We found a bug in the code."
+  },
+  {
+    "word": "bus",
+    "translation": "шина",
+    "transcription": "/bʌs/",
+    "sentence": "The data bus transfers information between components."
+  },
+  {
+    "word": "capacity",
+    "translation": "ёмкость",
+    "transcription": "/kəˈpæs.ə.ti/",
+    "sentence": "The disk capacity is two terabytes."
+  },
+  {
+    "word": "certificate",
+    "translation": "сертификат",
+    "transcription": "/səˈtɪf.ɪ.kət/",
+    "sentence": "The website has a valid SSL certificate."
+  },
+  {
+    "word": "circuit",
+    "translation": "схема",
+    "transcription": "/ˈsɜː.kɪt/",
+    "sentence": "The circuit board is damaged."
+  },
+  {
+    "word": "class",
+    "translation": "класс",
+    "transcription": "/klɑːs/",
+    "sentence": "This class represents a student."
+  },
+  {
+    "word": "client",
+    "translation": "клиент",
+    "transcription": "/ˈklaɪ.ənt/",
+    "sentence": "The client sends a request to the server."
+  },
+  {
+    "word": "command",
+    "translation": "команда",
+    "transcription": "/kəˈmɑːnd/",
+    "sentence": "Type this command in the terminal."
+  },
+  {
+    "word": "communication",
+    "translation": "связь",
+    "transcription": "/kəˌmjuː.nɪˈkeɪ.ʃən/",
+    "sentence": "Good communication is important in IT projects."
+  },
+  {
+    "word": "complexity",
+    "translation": "сложность",
+    "transcription": "/kəmˈplek.sə.ti/",
+    "sentence": "The algorithm has low complexity."
+  },
+  {
+    "word": "component",
+    "translation": "компонент",
+    "transcription": "/kəmˈpəʊ.nənt/",
+    "sentence": "Each component can be tested separately."
+  },
+  {
+    "word": "compression",
+    "translation": "сжатие",
+    "transcription": "/kəmˈpreʃ.ən/",
+    "sentence": "File compression saves disk space."
+  },
+  {
+    "word": "condition",
+    "translation": "условие",
+    "transcription": "/kənˈdɪʃ.ən/",
+    "sentence": "The loop stops when the condition is false."
+  },
+  {
+    "word": "configuration",
+    "translation": "конфигурация",
+    "transcription": "/kənˌfɪɡ.əˈreɪ.ʃən/",
+    "sentence": "Check the server configuration."
+  },
+  {
+    "word": "connection",
+    "translation": "соединение",
+    "transcription": "/kəˈnek.ʃən/",
+    "sentence": "The connection timed out."
+  },
+  {
+    "word": "console",
+    "translation": "консоль",
+    "transcription": "/kənˈsəʊl/",
+    "sentence": "The error appears in the console."
+  },
+  {
+    "word": "constant",
+    "translation": "константа",
+    "transcription": "/ˈkɒn.stənt/",
+    "sentence": "Define the constant at the top of the file."
+  },
+  {
+    "word": "container",
+    "translation": "контейнер",
+    "transcription": "/kənˈteɪ.nər/",
+    "sentence": "Docker uses containers to run applications."
+  },
+  {
+    "word": "control",
+    "translation": "управление",
+    "transcription": "/kənˈtrəʊl/",
+    "sentence": "Version control helps track changes."
+  },
+  {
+    "word": "conversion",
+    "translation": "преобразование",
+    "transcription": "/kənˈvɜː.ʃən/",
+    "sentence": "Data conversion can cause errors."
+  },
+  {
+    "word": "cookie",
+    "translation": "cookie-файл",
+    "transcription": "/ˈkʊk.i/",
+    "sentence": "The website stores cookies in your browser."
+  },
+  {
+    "word": "core",
+    "translation": "ядро",
+    "transcription": "/kɔːr/",
+    "sentence": "The processor has eight cores."
+  },
+  {
+    "word": "crash",
+    "translation": "сбой",
+    "transcription": "/kræʃ/",
+    "sentence": "The system crash lost our data."
+  },
+  {
+    "word": "cursor",
+    "translation": "курсор",
+    "transcription": "/ˈkɜː.sər/",
+    "sentence": "Move the cursor to the next line."
+  }
+]
