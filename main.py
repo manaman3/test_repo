@@ -89,11 +89,39 @@ from faster_whisper import WhisperModel
 
 
 
+
+
+import asyncio
+import os
+from aiohttp import web
+
+from maxapi import Bot, Dispatcher
+from maxapi.types import BotCommand
+from maxapi.methods.set_commands import SetCommands
+
+
+
 import os
 
 TOKEN = os.getenv("MAX_BOT_TOKEN")
 if not TOKEN:
     raise RuntimeError("MAX_BOT_TOKEN не задан")
+
+
+
+
+# ──────────────────────────────────────────────
+# Настройки Webhook
+# ──────────────────────────────────────────────
+# URL, по которому MAX будет стучаться (должен быть доступен из интернета)
+WEBHOOK_URL = os.getenv("WEBHOOK_URL", "https://ваш-домен.com/webhook")
+# Локальный адрес и порт, который слушает сервер
+HOST = os.getenv("HOST", "0.0.0.0")
+PORT = int(os.getenv("PORT", "8080"))
+# Секретный токен (опционально, если MAX его поддерживает — защитит от левых запросов)
+WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET", "")
+
+
 
 
 # цау цау
@@ -575,29 +603,105 @@ async def practice_callback_word(event: MessageCallback, context: MemoryContext)
 
 
 
-# ──────────────────────────────────────────────
-# Запуск
-# ──────────────────────────────────────────────
-async def main():
+# # ──────────────────────────────────────────────
+# # Запуск
+# # ──────────────────────────────────────────────
+# async def main():
 
+#     commands_to_set = [
+#         BotCommand(name="start",      description="🚀 Запустить бота и пройти онбординг"),
+#         BotCommand(name="learn",     description="📖 Выбрать тему для изучения"),
+#         BotCommand(name="practice",     description="🔁 Начать сессию повторения слов"),
+#         BotCommand(name="dictionary", description="📚 Мой личный словарь"),
+#         BotCommand(name="progress",   description="📊 Мой прогресс"),
+#         BotCommand(name="remind",     description="⏰ Настроить напоминания"),
+#         BotCommand(name="help",       description="❓ Помощь и список команд"),
+#     ]
+
+
+#     setter = SetCommands(bot, commands=commands_to_set)
+#     result = await setter.fetch()
+
+
+
+
+#     # await dp.start_polling(bot) # polling вместо вебхуков
+
+
+
+
+
+# ──────────────────────────────────────────────
+# HTTP-обработчик входящих обновлений от MAX
+# ──────────────────────────────────────────────
+async def handle_webhook(request: web.Request) -> web.Response:
+    # Проверка секрета (если задан)
+    if WEBHOOK_SECRET:
+        if request.headers.get("X-Max-Secret") != WEBHOOK_SECRET:
+            return web.Response(status=403)
+
+    try:
+        event_json = await request.json()
+    except Exception:
+        return web.Response(status=400)
+
+    # Передаём событие в диспетчер — он вызовет нужный хендлер
+    await dp.process_update_webhook(event_json, bot)
+    return web.Response(status=200)
+
+
+async def healthcheck(_: web.Request) -> web.Response:
+    return web.Response(text="ok")
+
+
+
+
+async def main() -> None:
+    # 1. Регистрируем команды
     commands_to_set = [
         BotCommand(name="start",      description="🚀 Запустить бота и пройти онбординг"),
-        BotCommand(name="learn",     description="📖 Выбрать тему для изучения"),
-        BotCommand(name="practice",     description="🔁 Начать сессию повторения слов"),
+        BotCommand(name="learn",      description="📖 Выбрать тему для изучения"),
+        BotCommand(name="practice",   description="🔁 Начать сессию повторения слов"),
         BotCommand(name="dictionary", description="📚 Мой личный словарь"),
         BotCommand(name="progress",   description="📊 Мой прогресс"),
         BotCommand(name="remind",     description="⏰ Настроить напоминания"),
         BotCommand(name="help",       description="❓ Помощь и список команд"),
     ]
-
-
     setter = SetCommands(bot, commands=commands_to_set)
-    result = await setter.fetch()
+    await setter.fetch()
+
+    # 2. Поднимаем aiohttp-сервер
+    app = web.Application()
+    app.router.add_post("/webhook", handle_webhook)
+    app.router.add_get("/health", healthcheck)
+
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, HOST, PORT)
+    await site.start()
+
+    print(f"🌐 Webhook-сервер запущен на http://{HOST}:{PORT}/webhook")
+
+    # 3. Сообщаем MAX, куда слать обновления
+    #    (в некоторых версиях maxapi метод может называться set_webhook / subscribe_webhook)
+    try:
+        await bot.set_webhook(url=WEBHOOK_URL)
+        print(f"✅ Webhook зарегистрирован: {WEBHOOK_URL}")
+    except AttributeError:
+        print("⚠️ Метод set_webhook не найден — зарегистрируйте URL через API MAX вручную.")
+    except Exception as e:
+        print(f"⚠️ Не удалось установить webhook: {e}")
+
+    # 4. Держим процесс живым
+    try:
+        await asyncio.Event().wait()
+    finally:
+        await runner.cleanup()
 
 
 
 
-    await dp.start_polling(bot)
+
 
 if __name__ == '__main__':
     asyncio.run(main())
