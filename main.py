@@ -147,7 +147,7 @@ WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET", "")
 # model_path = "./whisper_model"
 # Загружаем модель один раз при старте (можно вынести в отдельный поток)
 model = WhisperModel(
-    "base.en",#"large-v3",           # или "turbo", "medium" — зависит от железа
+    "small.en",#"large-v3",           # или "turbo", "medium" — зависит от железа
     device="cpu",        # или "cpu"
     compute_type="int8" # или "int8" для CPU
 #    download_root=model_path
@@ -627,7 +627,7 @@ async def handle_voice(event: MessageCreated):
 
 
 
-        await event.message.answer(f"📝 Распознанный текст:\n\n{text}")
+        # await event.message.answer(f"📝 Распознанный текст:\n\n{text}")
         return
 
 
