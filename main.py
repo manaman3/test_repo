@@ -53,6 +53,16 @@ class Voice():
     def __init__(self) -> None:
         self.users = list()
 
+        self.users_sent = list()
+
+        # Создаём пустой словарь
+        self.words = dict()
+
+        # # Добавление: ключ = id, значение = слово
+        # words[1] = "привет"
+        # words[2] = "мир"
+        # words[3] = "питон"
+
 
 
 
@@ -65,11 +75,14 @@ class Voice():
     def add_user(self, id):
         if id not in self.users:
             self.users.append(id)
+
+    
         
 
 
     def remove_user(self, id):
         pass
+
 
 voice = Voice()
 
@@ -320,14 +333,31 @@ async def cmd_start(event: MessageCreated):
     Обработчик команды /start
     commands_info: 🚀 Запустить бота и пройти онбординг
     """
+
+
+
+
     await event.message.answer(
         "👋 Привет! Я — тренажёр лексики изучения английского.\n\n"
         "Что я умею:\n"
-        "• 📖 Подбирать слова по экзаменационным темам\n"
-        "• 🔁 Повторять их по системе интервального повторения\n"
-        "• 📊 Показывать твой прогресс\n\n"
-        "Начни с /topics, чтобы выбрать тему, или /review, чтобы повторить слова."
+        "• 📖 Давать слова для изучения\n"
+        "• 🔁 Проверять их с помощью голосовых\n"
+        "• 📊 Проверять правильность составления предложения\n\n"
+        "Начни с /learn, чтобы начать изучение, или /practice, чтобы перейти к проверке." \
+        "Для предложений используйте /sentence"
     )
+
+
+
+
+    # await event.message.answer(
+    #     "👋 Привет! Я — тренажёр лексики изучения английского.\n\n"
+    #     "Что я умею:\n"
+    #     "• 📖 Подбирать слова по экзаменационным темам\n"
+    #     "• 🔁 Повторять их по системе интервального повторения\n"
+    #     "• 📊 Показывать твой прогресс\n\n"
+    #     "Начни с /topics, чтобы выбрать тему, или /review, чтобы повторить слова."
+    # )
 
 
 
@@ -458,20 +488,20 @@ async def cmd_practice(event: MessageCreated):
     w = random_word()
     await event.message.answer(f"""
 
-🔁 Начинаем повторение: 
+🔁 Начинаем проверку: 
 
-📖 {w['word']}
-🔊 {w['transcription']}
+
 
 🇷🇺 {w['translation']}
 
-💬 {w['sentence']}
+
 
     """, attachments=[kb.as_markup()])
-    print(f"{w['word']}  {w['transcription']}")
+    print(f"{w['word']}")
     print(f"→ {w['translation']}")
-    print(f"Пример: {w['sentence']}")
 
+
+    Voice.words[event.message.sender.user_id] = w['word']
         
 
     # import json
@@ -505,22 +535,20 @@ async def practice_callback_word(event: MessageCallback, context: MemoryContext)
     w = random_word()
     await event.edit(f"""
 
-🔁 Начинаем повторение: 
+🔁 Начинаем проверку: 
 
-📖 {w['word']}
-🔊 {w['transcription']}
+
 
 🇷🇺 {w['translation']}
 
-💬 {w['sentence']}
+
 
     """, attachments=[kb.as_markup()])
-    print(f"{w['word']}  {w['transcription']}")
+    print(f"{w['word']}")
     print(f"→ {w['translation']}")
-    print(f"Пример: {w['sentence']}")
 
 
-
+        
 
 
 
@@ -553,6 +581,12 @@ async def handle_voice(event: MessageCreated):
     if not body or not body.attachments:
         return                                 # не наше — молча выходим
 
+
+    if not voice.check_user(event.message.sender.user_id): # ignore
+        await event.message.answer("Вы уже не находитесь в режиме использующем голосовые сообщения")
+        return
+        
+
     for att in body.attachments:
         if not isinstance(att, Audio):
             continue
@@ -572,6 +606,7 @@ async def handle_voice(event: MessageCreated):
         # segments, info = model.transcribe(buffer, ...)
 
         # faster-whisper умеет работать с file-like объектами
+        await event.message.answer(f"Начало распознавания голосового сообщения")
         segments, info = model.transcribe(
             buffer,
             language="en",          # можно не указывать — авто-детект
@@ -581,6 +616,15 @@ async def handle_voice(event: MessageCreated):
         )
 
         text = "".join(segment.text for segment in segments).strip()
+
+
+        if not voice.check_user(event.message.sender.user_id): # ignore
+            if Voice.words[event.message.sender.user_id] in text:
+                await event.message.answer(f'Правильно! ✅ \n Это слово "{Voice.words[event.message.sender.user_id]}"')
+            else:
+                await event.message.answer(f'Неправильно! ❌ \n Это слово "{Voice.words[event.message.sender.user_id]}" \n Твой ответ: {text}')
+
+
 
         await event.message.answer(f"📝 Распознанный текст:\n\n{text}")
         return
@@ -816,10 +860,10 @@ async def main() -> None:
     commands_to_set = [
         BotCommand(name="start",      description="🚀 Запустить бота и пройти онбординг"),
         BotCommand(name="learn",      description="📖 Выбрать тему для изучения"),
-        BotCommand(name="practice",   description="🔁 Начать сессию повторения слов"),
-        BotCommand(name="dictionary", description="📚 Мой личный словарь"),
-        BotCommand(name="progress",   description="📊 Мой прогресс"),
-        BotCommand(name="remind",     description="⏰ Настроить напоминания"),
+        BotCommand(name="practice",   description="🔁 Начать сессию проверки слов"),
+        BotCommand(name="sentence", description="📚 Проверка предложений"),
+        # BotCommand(name="progress",   description="📊 Мой прогресс"),
+        # BotCommand(name="remind",     description="⏰ Настроить напоминания"),
         BotCommand(name="help",       description="❓ Помощь и список команд"),
     ]
     setter = SetCommands(bot, commands=commands_to_set)
