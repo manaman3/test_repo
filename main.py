@@ -606,7 +606,7 @@ async def handle_voice(event: MessageCreated):
 
 
         if voice.check_user(event.message.sender.user_id): # ignore
-            if voice.words[event.message.sender.user_id] in text:
+            if voice.words[event.message.sender.user_id] in text.lower():
                 await event.message.answer(f'Правильно! ✅ \nЭто слово "{voice.words[event.message.sender.user_id]}"')
             else:
                 await event.message.answer(f'Неправильно! ❌ \nЭто слово "{voice.words[event.message.sender.user_id]}" \nТвой ответ: {text}')
