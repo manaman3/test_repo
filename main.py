@@ -573,13 +573,23 @@ async def handle_voice(event: MessageCreated):
         await event.message.answer("Вы уже не находитесь в режиме использующем голосовые сообщения")
         return
         
-
+    await event.message.answer("11")
     for att in body.attachments:
+        await event.message.answer("12")
+        
         if not isinstance(att, Audio):
             continue
 
         try:
-            buffer = await download_audio_to_memory(att)
+
+
+            url = att.payload.url          # ← вот здесь, а не download_url
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url) as resp:
+                    resp.raise_for_status()
+                    data = await resp.read()
+                    # return io.BytesIO(data)
+            buffer = io.BytesIO(data)#await download_audio_to_memory(att)
 
 
         except Exception as e:
