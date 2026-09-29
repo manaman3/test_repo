@@ -521,16 +521,9 @@ async def practice_callback_word(event: MessageCallback, context: MemoryContext)
 
     w = random_word()
     await event.edit(f"""
-
 🔁 Начинаем проверку: 
-
-
-
 🇷🇺 {w['translation']}
-
-
-
-    """)
+            """)
     print(f"{w['word']}")
     print(f"→ {w['translation']}")
 
