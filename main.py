@@ -476,13 +476,6 @@ async def cmd_practice(event: MessageCreated):
     await event.message.answer("Вы выбрали режим проверки слов")
 
 
-    kb = InlineKeyboardBuilder()
-    kb.row(
-        CallbackButton(
-            text="Следующее слово",
-            payload="next_lesson_word",
-        )
-    )
 
 
     w = random_word()
@@ -496,7 +489,7 @@ async def cmd_practice(event: MessageCreated):
 
 
 
-    """, attachments=[kb.as_markup()])
+    """)
     print(f"{w['word']}")
     print(f"→ {w['translation']}")
 
@@ -523,13 +516,6 @@ async def cmd_practice(event: MessageCreated):
 @dp.message_callback(F.callback.payload.startswith("next_practice_word"))
 async def practice_callback_word(event: MessageCallback, context: MemoryContext) -> None:
     print("fewgerger")
-    kb = InlineKeyboardBuilder()
-    kb.row(
-        CallbackButton(
-            text="Следующее слово",
-            payload="next_lesson_word",
-        )
-    )
 
 
     w = random_word()
@@ -543,7 +529,7 @@ async def practice_callback_word(event: MessageCallback, context: MemoryContext)
 
 
 
-    """, attachments=[kb.as_markup()])
+    """)
     print(f"{w['word']}")
     print(f"→ {w['translation']}")
 
@@ -618,11 +604,30 @@ async def handle_voice(event: MessageCreated):
         text = "".join(segment.text for segment in segments).strip()
 
 
-        if not voice.check_user(event.message.sender.user_id): # ignore
+        if voice.check_user(event.message.sender.user_id): # ignore
             if Voice.words[event.message.sender.user_id] in text:
                 await event.message.answer(f'Правильно! ✅ \n Это слово "{Voice.words[event.message.sender.user_id]}"')
             else:
                 await event.message.answer(f'Неправильно! ❌ \n Это слово "{Voice.words[event.message.sender.user_id]}" \n Твой ответ: {text}')
+
+
+            w = random_word()
+            await event.message.answer(f"""
+
+        🔁 Начинаем проверку: 
+
+
+
+        🇷🇺 {w['translation']}
+
+
+
+            """)
+            print(f"{w['word']}")
+            print(f"→ {w['translation']}")
+
+
+            Voice.words[event.message.sender.user_id] = w['word']
 
 
 
