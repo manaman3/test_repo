@@ -628,7 +628,7 @@ async def handle_voice(event: MessageCreated):
             print(f"→ {w['translation']}")
 
 
-            Voice.words[event.message.sender.user_id] = w['word']
+            voice.words[event.message.sender.user_id] = w['word']
 
 
 
