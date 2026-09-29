@@ -3,7 +3,11 @@ import logging
 from maxapi import Bot, Dispatcher, F
 from maxapi.context import MemoryContext, State, StatesGroup
 from maxapi.types import MessageCreated, Command, BotStarted
-
+import aiohttp
+import io
+import logging
+from maxapi.types.attachments.audio import Audio
+from maxapi.types import MessageCreated
 
 from maxapi import Bot, Dispatcher, F
 from maxapi.filters.callback_payload import CallbackPayload
@@ -137,13 +141,13 @@ model = WhisperModel(
 )
 
 
-async def download_voice_to_memory(attachment: Audio) -> io.BytesIO:
-    """Скачивает голосовое сообщение в BytesIO без сохранения на диск."""
-    async with aiohttp.ClientSession() as session:
-        async with session.get(attachment.download_url) as resp:
-            resp.raise_for_status()
-            data = await resp.read()
-            return io.BytesIO(data)
+# async def download_voice_to_memory(attachment: Audio) -> io.BytesIO:
+#     """Скачивает голосовое сообщение в BytesIO без сохранения на диск."""
+#     async with aiohttp.ClientSession() as session:
+#         async with session.get(attachment.download_url) as resp:
+#             resp.raise_for_status()
+#             data = await resp.read()
+#             return io.BytesIO(data)
 
 
 
@@ -520,19 +524,6 @@ async def practice_callback_word(event: MessageCallback, context: MemoryContext)
 
 
 
-import logging
-
-@dp.message_created()
-async def debug_any(event: MessageCreated):
-    logging.info("=== DEBUG message_created ===")
-    logging.info("body: %s", event.message.body)
-    if event.message.body:
-        logging.info("text: %r", getattr(event.message.body, "text", None))
-        logging.info("attachments: %r", getattr(event.message.body, "attachments", None))
-        atts = getattr(event.message.body, "attachments", None) or []
-        for i, att in enumerate(atts):
-            logging.info("att[%d] type=%s dict=%s", i, type(att).__name__, att.__dict__)
-    logging.info("=== /DEBUG ===")
 
 
 
@@ -546,40 +537,137 @@ async def debug_any(event: MessageCreated):
 
 
 
+async def download_audio_to_memory(attachment: Audio) -> io.BytesIO:
+    """Скачивает аудио по payload.url в BytesIO."""
+    url = attachment.payload.url          # ← вот здесь, а не download_url
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            resp.raise_for_status()
+            data = await resp.read()
+            return io.BytesIO(data)
 
 
-
-@dp.message_created(F.message.attachments)
+@dp.message_created()                     # ← без фильтра
 async def handle_voice(event: MessageCreated):
-    """Обработчик голосовых и аудио-сообщений."""
-    attachments = event.message.body.attachments
-    if not attachments:
-        return
+    body = event.message.body
+    if not body or not body.attachments:
+        return                                 # не наше — молча выходим
 
-    for attachment in attachments:
-        if not isinstance(attachment, Audio):
+    for att in body.attachments:
+        if not isinstance(att, Audio):
             continue
 
-        # 1. Скачиваем аудио в память (без сохранения на диск)
         try:
-            audio_buffer = await download_voice_to_memory(attachment)
+            buffer = await download_audio_to_memory(att)
+
+
         except Exception as e:
-            logging.error(f"Не удалось скачать аудио: {e}")
-            await event.message.answer("❌ Не удалось скачать голосовое сообщение.")
+            logging.exception("Не удалось скачать аудио")
+            await event.message.answer(f"❌ Ошибка скачивания: {e}")
             return
 
-        # 2. Здесь можно делать что угодно с аудио:
-        #    - отправить в Whisper для транскрипции
-        #    - сохранить в файл
-        #    - отправить обратно пользователю
-        # Для примера просто сообщим, что файл получен:
-        await event.message.answer(
-            f"🎤 Получено аудио: {attachment.duration} сек. "
-            f"({len(audio_buffer.getvalue())} байт)"
+        size = len(buffer.getvalue())
+        # await event.message.answer(f"🎤 Аудио получено: {size} байт")
+        # здесь можно отдать buffer в Whisper:
+        # segments, info = model.transcribe(buffer, ...)
+
+        # faster-whisper умеет работать с file-like объектами
+        segments, info = model.transcribe(
+            buffer,
+            language="eu",          # можно не указывать — авто-детект
+            beam_size=5,
+            vad_filter=True,        # отсекает тишину
+            vad_parameters=dict(min_silence_duration_ms=500)
         )
+
+        text = "".join(segment.text for segment in segments).strip()
+
+        await event.message.answer(f"📝 Распознанный текст:\n\n{text}")
         return
 
-    await event.message.answer("Пожалуйста, отправьте голосовое сообщение.")
+
+    # если вложение есть, но не Audio — можно тоже ответить
+    await event.message.answer("Вложение не распознано как аудио.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import logging
+
+# @dp.message_created()
+# async def debug_any(event: MessageCreated):
+#     logging.info("=== DEBUG message_created ===")
+#     logging.info("body: %s", event.message.body)
+#     if event.message.body:
+#         logging.info("text: %r", getattr(event.message.body, "text", None))
+#         logging.info("attachments: %r", getattr(event.message.body, "attachments", None))
+#         atts = getattr(event.message.body, "attachments", None) or []
+#         for i, att in enumerate(atts):
+#             logging.info("att[%d] type=%s dict=%s", i, type(att).__name__, att.__dict__)
+#     logging.info("=== /DEBUG ===")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# @dp.message_created(F.message.attachments)
+# async def handle_voice(event: MessageCreated):
+#     """Обработчик голосовых и аудио-сообщений."""
+#     attachments = event.message.body.attachments
+#     if not attachments:
+#         return
+
+#     for attachment in attachments:
+#         if not isinstance(attachment, Audio):
+#             continue
+
+#         # 1. Скачиваем аудио в память (без сохранения на диск)
+#         try:
+#             audio_buffer = await download_voice_to_memory(attachment)
+#         except Exception as e:
+#             logging.error(f"Не удалось скачать аудио: {e}")
+#             await event.message.answer("❌ Не удалось скачать голосовое сообщение.")
+#             return
+
+#         # 2. Здесь можно делать что угодно с аудио:
+#         #    - отправить в Whisper для транскрипции
+#         #    - сохранить в файл
+#         #    - отправить обратно пользователю
+#         # Для примера просто сообщим, что файл получен:
+#         await event.message.answer(
+#             f"🎤 Получено аудио: {attachment.duration} сек. "
+#             f"({len(audio_buffer.getvalue())} байт)"
+#         )
+#         return
+
+#     await event.message.answer("Пожалуйста, отправьте голосовое сообщение.")
 
 
 
