@@ -564,6 +564,9 @@ async def download_audio_to_memory(attachment: Audio) -> io.BytesIO:
 
 @dp.message_created()                     # ← без фильтра
 async def handle_voice(event: MessageCreated):
+
+    coo = 0
+    print(coo)
     body = event.message.body
     if not body or not body.attachments:
         return                                 # не наше — молча выходим
@@ -574,9 +577,12 @@ async def handle_voice(event: MessageCreated):
         return
         
     await event.message.answer("11")
+    print(coo)
+    coo+=1
     for att in body.attachments:
         await event.message.answer("12")
-        
+        print(coo)
+        coo+=1        
         if not isinstance(att, Audio):
             continue
 
