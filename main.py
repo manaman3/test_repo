@@ -617,12 +617,7 @@ async def handle_voice(event: MessageCreated):
 
         🔁 Начинаем проверку: 
 
-
-
         🇷🇺 {w['translation']}
-
-
-
             """)
             print(f"{w['word']}")
             print(f"→ {w['translation']}")
