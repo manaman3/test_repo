@@ -574,7 +574,7 @@ async def handle_voice(event: MessageCreated):
         # faster-whisper умеет работать с file-like объектами
         segments, info = model.transcribe(
             buffer,
-            language="eu",          # можно не указывать — авто-детект
+            language="en",          # можно не указывать — авто-детект
             beam_size=5,
             vad_filter=True,        # отсекает тишину
             vad_parameters=dict(min_silence_duration_ms=500)
