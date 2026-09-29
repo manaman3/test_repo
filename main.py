@@ -37,7 +37,7 @@ from maxapi.types.command import BotCommand
 from maxapi.utils.inline_keyboard import InlineKeyboardBuilder
 from maxapi.methods.set_commands import SetCommands
 # from sm_2 import Scheduler, Card
-from maxapi.types.attachments.audio import Audio
+from maxapi.types.attachments.audio import Audio,
 
 print("123")
 
@@ -514,6 +514,29 @@ async def practice_callback_word(event: MessageCallback, context: MemoryContext)
     print(f"{w['word']}  {w['transcription']}")
     print(f"→ {w['translation']}")
     print(f"Пример: {w['sentence']}")
+
+
+
+
+
+
+import logging
+
+@dp.message_created()
+async def debug_any(event: MessageCreated):
+    logging.info("=== DEBUG message_created ===")
+    logging.info("body: %s", event.message.body)
+    if event.message.body:
+        logging.info("text: %r", getattr(event.message.body, "text", None))
+        logging.info("attachments: %r", getattr(event.message.body, "attachments", None))
+        atts = getattr(event.message.body, "attachments", None) or []
+        for i, att in enumerate(atts):
+            logging.info("att[%d] type=%s dict=%s", i, type(att).__name__, att.__dict__)
+    logging.info("=== /DEBUG ===")
+
+
+
+
 
 
 
