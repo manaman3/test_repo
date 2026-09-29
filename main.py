@@ -37,7 +37,7 @@ from maxapi.types.command import BotCommand
 from maxapi.utils.inline_keyboard import InlineKeyboardBuilder
 from maxapi.methods.set_commands import SetCommands
 # from sm_2 import Scheduler, Card
-from maxapi.types.attachments.audio import Audio,
+from maxapi.types.attachments.audio import Audio
 
 print("123")
 
