@@ -343,8 +343,9 @@ async def cmd_start(event: MessageCreated):
         "• 📖 Давать слова для изучения\n"
         "• 🔁 Проверять их с помощью голосовых\n"
         "• 📊 Проверять правильность составления предложения\n\n"
-        "Начни с /learn, чтобы начать изучение, или /practice, чтобы перейти к проверке." \
-        "Для предложений используйте /sentence"
+        "Начни с /learn, чтобы начать изучение, или /practice, чтобы перейти к проверке " \
+        "Для предложений используйте /sentence "
+        "Если что-то непонятно к вашему распоряжению /help"
     )
 
 
@@ -494,7 +495,7 @@ async def cmd_practice(event: MessageCreated):
     print(f"→ {w['translation']}")
 
 
-    Voice.words[event.message.sender.user_id] = w['word']
+    voice.words[event.message.sender.user_id] = w['word']
         
 
     # import json
@@ -605,10 +606,10 @@ async def handle_voice(event: MessageCreated):
 
 
         if voice.check_user(event.message.sender.user_id): # ignore
-            if Voice.words[event.message.sender.user_id] in text:
-                await event.message.answer(f'Правильно! ✅ \n Это слово "{Voice.words[event.message.sender.user_id]}"')
+            if voice.words[event.message.sender.user_id] in text:
+                await event.message.answer(f'Правильно! ✅ \n Это слово "{voice.words[event.message.sender.user_id]}"')
             else:
-                await event.message.answer(f'Неправильно! ❌ \n Это слово "{Voice.words[event.message.sender.user_id]}" \n Твой ответ: {text}')
+                await event.message.answer(f'Неправильно! ❌ \n Это слово "{voice.words[event.message.sender.user_id]}" \n Твой ответ: {text}')
 
 
             w = random_word()
