@@ -707,6 +707,8 @@ async def main() -> None:
         bot=bot,
         host='0.0.0.0',
         port=443,
+        ssl_certfile="/certs/fullchain.pem",   # путь внутри контейнера
+        ssl_keyfile="/certs/privkey.pem",       # путь внутри контейнера
     )
 
 

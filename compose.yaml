@@ -6,3 +6,6 @@ services:
     restart: unless-stopped
     ports:
       - "443:443"   # только если webhook
+    volumes:
+      - /etc/letsencrypt/live/hackatonmax2026.hopto.org/fullchain.pem:/certs/fullchain.pem:ro
+      - /etc/letsencrypt/live/hackatonmax2026.hopto.org/privkey.pem:/certs/privkey.pem:ro
