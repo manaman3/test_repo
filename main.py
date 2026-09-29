@@ -561,12 +561,16 @@ async def download_audio_to_memory(attachment: Audio) -> io.BytesIO:
             data = await resp.read()
             return io.BytesIO(data)
 
-
-@dp.message_created()                     # ← без фильтра
+@dp.message_created()
 async def handle_voice(event: MessageCreated):
+    """Лёгкий хендлер: сразу отвечает MAX'у 200, работа — в фоне."""
+    body = event.message.body
+    if not body or not body.attachments:
+        return
+    asyncio.create_task(_process_voice(event))
 
-    coo = 0
-    print(coo)
+
+async def _process_voice(event: MessageCreated):
     body = event.message.body
     if not body or not body.attachments:
         return                                 # не наше — молча выходим
@@ -576,26 +580,13 @@ async def handle_voice(event: MessageCreated):
         await event.message.answer("Вы уже не находитесь в режиме использующем голосовые сообщения")
         return
         
-    await event.message.answer("11")
-    await event.message.answer(str(coo))
-    coo+=1
+
     for att in body.attachments:
-        await event.message.answer("12")
-        await event.message.answer(str(coo))
-        coo+=1        
         if not isinstance(att, Audio):
             continue
 
         try:
-
-
-            url = att.payload.url          # ← вот здесь, а не download_url
-            async with aiohttp.ClientSession() as session:
-                async with session.get(url) as resp:
-                    resp.raise_for_status()
-                    data = await resp.read()
-                    # return io.BytesIO(data)
-            buffer = io.BytesIO(data)#await download_audio_to_memory(att)
+            buffer = await download_audio_to_memory(att)
 
 
         except Exception as e:
