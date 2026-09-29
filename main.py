@@ -577,11 +577,11 @@ async def handle_voice(event: MessageCreated):
         return
         
     await event.message.answer("11")
-    print(coo)
+    await event.message.answer(str(coo))
     coo+=1
     for att in body.attachments:
         await event.message.answer("12")
-        print(coo)
+        await event.message.answer(str(coo))
         coo+=1        
         if not isinstance(att, Audio):
             continue
