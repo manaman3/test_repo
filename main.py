@@ -458,7 +458,7 @@ async def learn_callback_word(event: MessageCallback, context: MemoryContext) ->
 
 
 
-
+ 
 
 
 @dp.message_created(Command("practice"))
