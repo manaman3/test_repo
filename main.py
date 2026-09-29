@@ -17,7 +17,8 @@ from maxapi.utils.inline_keyboard import InlineKeyboardBuilder
 
 
 
-
+import aiohttp
+import io
 
 import asyncio
 import logging
@@ -36,7 +37,7 @@ from maxapi.types.command import BotCommand
 from maxapi.utils.inline_keyboard import InlineKeyboardBuilder
 from maxapi.methods.set_commands import SetCommands
 # from sm_2 import Scheduler, Card
-
+from maxapi.types.attachments.audio import Audio
 
 print("123")
 
@@ -527,31 +528,74 @@ async def practice_callback_word(event: MessageCallback, context: MemoryContext)
 
 @dp.message_created(F.message.attachments)
 async def handle_voice(event: MessageCreated):
+    """Обработчик голосовых и аудио-сообщений."""
+    attachments = event.message.body.attachments
+    if not attachments:
+        return
 
-    print("qqqqqqqqqq")
-    for attachment in event.message.attachments:
+    for attachment in attachments:
         if not isinstance(attachment, Audio):
             continue
 
-        # 1. Скачиваем в память
-        audio_buffer = await download_voice_to_memory(attachment)
+        # 1. Скачиваем аудио в память (без сохранения на диск)
+        try:
+            audio_buffer = await download_voice_to_memory(attachment)
+        except Exception as e:
+            logging.error(f"Не удалось скачать аудио: {e}")
+            await event.message.answer("❌ Не удалось скачать голосовое сообщение.")
+            return
 
-        # 2. Транскрибируем напрямую из BytesIO
-        # faster-whisper умеет работать с file-like объектами
-        segments, info = model.transcribe(
-            audio_buffer,
-            language="eu",          # можно не указывать — авто-детект
-            beam_size=5,
-            vad_filter=True,        # отсекает тишину
-            vad_parameters=dict(min_silence_duration_ms=500)
+        # 2. Здесь можно делать что угодно с аудио:
+        #    - отправить в Whisper для транскрипции
+        #    - сохранить в файл
+        #    - отправить обратно пользователю
+        # Для примера просто сообщим, что файл получен:
+        await event.message.answer(
+            f"🎤 Получено аудио: {attachment.duration} сек. "
+            f"({len(audio_buffer.getvalue())} байт)"
         )
-
-        text = "".join(segment.text for segment in segments).strip()
-
-        await event.message.answer(f"📝 Распознанный текст:\n\n{text}")
         return
 
     await event.message.answer("Пожалуйста, отправьте голосовое сообщение.")
+
+
+
+
+
+
+
+
+
+
+
+
+# @dp.message_created(F.message.attachments)
+# async def handle_voice(event: MessageCreated):
+
+#     print("qqqqqqqqqq")
+#     for attachment in event.message.attachments:
+#         if not isinstance(attachment, Audio):
+#             continue
+
+#         # 1. Скачиваем в память
+#         audio_buffer = await download_voice_to_memory(attachment)
+
+#         # 2. Транскрибируем напрямую из BytesIO
+#         # faster-whisper умеет работать с file-like объектами
+#         segments, info = model.transcribe(
+#             audio_buffer,
+#             language="eu",          # можно не указывать — авто-детект
+#             beam_size=5,
+#             vad_filter=True,        # отсекает тишину
+#             vad_parameters=dict(min_silence_duration_ms=500)
+#         )
+
+#         text = "".join(segment.text for segment in segments).strip()
+
+#         await event.message.answer(f"📝 Распознанный текст:\n\n{text}")
+#         return
+
+#     await event.message.answer("Пожалуйста, отправьте голосовое сообщение.")
 
 
 
