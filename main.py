@@ -700,16 +700,22 @@ async def main() -> None:
 
 
 
-
+    await dp.init_serve(
+        bot=bot,
+        host="0.0.0.0",
+        port=443,
+        ssl_certfile="/certs/fullchain.pem",
+        ssl_keyfile="/certs/privkey.pem",
+    )
 # async def main():
     # Запускает FastAPI-сервер на 0.0.0.0:8080
-    await dp.handle_webhook(
-        bot=bot,
-        host='0.0.0.0',
-        port=443,
-        ssl_certfile="/certs/fullchain.pem",   # путь внутри контейнера
-        ssl_keyfile="/certs/privkey.pem",       # путь внутри контейнера
-    )
+    # await dp.handle_webhook(
+    #     bot=bot,
+    #     host='0.0.0.0',
+    #     port=443,
+    #     ssl_certfile="/certs/fullchain.pem",   # путь внутри контейнера
+    #     ssl_keyfile="/certs/privkey.pem",       # путь внутри контейнера
+    # )
 
 
 
