@@ -3,11 +3,7 @@ import logging
 from maxapi import Bot, Dispatcher, F
 from maxapi.context import MemoryContext, State, StatesGroup
 from maxapi.types import MessageCreated, Command, BotStarted
-import asyncio
-import uvicorn
-from fastapi import FastAPI
-from maxapi import Bot, Dispatcher
-from maxapi.webhook.fastapi import FastAPIMaxWebhook
+
 
 from maxapi import Bot, Dispatcher, F
 from maxapi.filters.callback_payload import CallbackPayload
@@ -703,28 +699,17 @@ async def main() -> None:
     #     await runner.cleanup()
 
 
-    webhook = FastAPIMaxWebhook(dp=dp, bot=bot)
-    app = FastAPI(lifespan=webhook.lifespan)
-    webhook.setup(app, path="/webhook")
 
-    config = uvicorn.Config(
-        app,
-        host="0.0.0.0",
-        port=443,
-        ssl_certfile="/certs/fullchain.pem",   # путь внутри контейнера
-        ssl_keyfile="/certs/privkey.pem",       # путь внутри контейнера
-    )
-    server = uvicorn.Server(config)
-    await server.serve()
+
 # async def main():
     # Запускает FastAPI-сервер на 0.0.0.0:8080
-    # await dp.handle_webhook(
-    #     bot=bot,
-    #     host='0.0.0.0',
-    #     port=443,
-    #     ssl_certfile="/certs/fullchain.pem",   # путь внутри контейнера
-    #     ssl_keyfile="/certs/privkey.pem",       # путь внутри контейнера
-    # )
+    await dp.handle_webhook(
+        bot=bot,
+        host='0.0.0.0',
+        port=8080,
+        # ssl_certfile="/certs/fullchain.pem",   # путь внутри контейнера
+        # ssl_keyfile="/certs/privkey.pem",       # путь внутри контейнера
+    )
 
 
 
