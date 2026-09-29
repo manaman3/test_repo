@@ -607,17 +607,15 @@ async def handle_voice(event: MessageCreated):
 
         if voice.check_user(event.message.sender.user_id): # ignore
             if voice.words[event.message.sender.user_id] in text:
-                await event.message.answer(f'Правильно! ✅ \n Это слово "{voice.words[event.message.sender.user_id]}"')
+                await event.message.answer(f'Правильно! ✅ \nЭто слово "{voice.words[event.message.sender.user_id]}"')
             else:
-                await event.message.answer(f'Неправильно! ❌ \n Это слово "{voice.words[event.message.sender.user_id]}" \n Твой ответ: {text}')
+                await event.message.answer(f'Неправильно! ❌ \nЭто слово "{voice.words[event.message.sender.user_id]}" \nТвой ответ: {text}')
 
 
             w = random_word()
             await event.message.answer(f"""
-
-        🔁 Начинаем проверку: 
-
-        🇷🇺 {w['translation']}
+🔁 Начинаем проверку: 
+🇷🇺 {w['translation']}
             """)
             print(f"{w['word']}")
             print(f"→ {w['translation']}")

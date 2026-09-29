@@ -1,602 +1,362 @@
 [
   {
-    "word": "algorithm",
-    "translation": "алгоритм",
-    "transcription": "/ˈæl.ɡə.rɪ.ðəm/",
-    "sentence": "The algorithm sorts the list quickly."
+    "word": "absolutely",
+    "translation": "абсолютно",
+    "transcription": "/ˈæb.sə.luːt.li/",
+    "sentence": "I absolutely agree with you."
   },
   {
-    "word": "application",
-    "translation": "приложение",
-    "transcription": "/ˌæp.lɪˈkeɪ.ʃən/",
-    "sentence": "This application runs on Windows."
+    "word": "achievement",
+    "translation": "достижение",
+    "transcription": "/əˈtʃiːv.mənt/",
+    "sentence": "Winning the prize was a great achievement."
   },
   {
-    "word": "array",
-    "translation": "массив",
-    "transcription": "/əˈreɪ/",
-    "sentence": "We store the numbers in an array."
+    "word": "actually",
+    "translation": "на самом деле",
+    "transcription": "/ˈæk.tʃu.ə.li/",
+    "sentence": "Actually, I don't know the answer."
   },
   {
-    "word": "automation",
-    "translation": "автоматизация",
-    "transcription": "/ˌɔː.təˈmeɪ.ʃən/",
-    "sentence": "Automation reduces manual work."
+    "word": "advantage",
+    "translation": "преимущество",
+    "transcription": "/ədˈvɑːn.tɪdʒ/",
+    "sentence": "Speed is a big advantage."
   },
   {
-    "word": "bandwidth",
-    "translation": "пропускная способность",
-    "transcription": "/ˈbænd.wɪdθ/",
-    "sentence": "The network has enough bandwidth."
+    "word": "adventure",
+    "translation": "приключение",
+    "transcription": "/ədˈven.tʃər/",
+    "sentence": "We had an amazing adventure."
   },
   {
-    "word": "binary",
-    "translation": "двоичный",
-    "transcription": "/ˈbaɪ.nər.i/",
-    "sentence": "Computers use binary code."
+    "word": "afternoon",
+    "translation": "после полудня",
+    "transcription": "/ˌɑːf.təˈnuːn/",
+    "sentence": "Let's meet in the afternoon."
   },
   {
-    "word": "bit",
-    "translation": "бит",
-    "transcription": "/bɪt/",
-    "sentence": "A bit is the smallest unit of data."
+    "word": "agreement",
+    "translation": "соглашение",
+    "transcription": "/əˈɡriː.mənt/",
+    "sentence": "They signed the agreement."
   },
   {
-    "word": "byte",
-    "translation": "байт",
-    "transcription": "/baɪt/",
-    "sentence": "One byte contains eight bits."
+    "word": "ambulance",
+    "translation": "скорая помощь",
+    "transcription": "/ˈæm.bjə.ləns/",
+    "sentence": "Call an ambulance immediately."
   },
   {
-    "word": "cache",
-    "translation": "кэш",
-    "transcription": "/kæʃ/",
-    "sentence": "The cache speeds up data access."
+    "word": "animal",
+    "translation": "животное",
+    "transcription": "/ˈæn.ɪ.məl/",
+    "sentence": "The animal is sleeping."
   },
   {
-    "word": "cloud",
-    "translation": "облако",
-    "transcription": "/klaʊd/",
-    "sentence": "We store backups in the cloud."
+    "word": "apartment",
+    "translation": "квартира",
+    "transcription": "/əˈpɑːt.mənt/",
+    "sentence": "She rents a small apartment."
   },
   {
-    "word": "cluster",
-    "translation": "кластер",
-    "transcription": "/ˈklʌs.tər/",
-    "sentence": "The server cluster handles high traffic."
+    "word": "attention",
+    "translation": "внимание",
+    "transcription": "/əˈten.ʃən/",
+    "sentence": "Pay attention to the details."
   },
   {
-    "word": "code",
-    "translation": "код",
-    "transcription": "/kəʊd/",
-    "sentence": "She writes clean code."
+    "word": "authority",
+    "translation": "власть",
+    "transcription": "/ɔːˈθɒr.ə.ti/",
+    "sentence": "The local authority made a decision."
   },
   {
-    "word": "compiler",
-    "translation": "компилятор",
-    "transcription": "/kəmˈpaɪ.lər/",
-    "sentence": "The compiler translates source code into machine code."
+    "word": "beautiful",
+    "translation": "красивый",
+    "transcription": "/ˈbjuː.tɪ.fəl/",
+    "sentence": "What a beautiful day!"
   },
   {
-    "word": "computation",
-    "translation": "вычисление",
-    "transcription": "/ˌkɒm.pjʊˈteɪ.ʃən/",
-    "sentence": "This computation takes a few seconds."
+    "word": "behavior",
+    "translation": "поведение",
+    "transcription": "/bɪˈheɪ.vjər/",
+    "sentence": "His behavior was strange."
   },
   {
-    "word": "computer",
-    "translation": "компьютер",
-    "transcription": "/kəmˈpjuː.tər/",
-    "sentence": "My computer needs an update."
+    "word": "benefit",
+    "translation": "выгода",
+    "transcription": "/ˈben.ɪ.fɪt/",
+    "sentence": "Exercise has many benefits."
   },
   {
-    "word": "cybersecurity",
-    "translation": "кибербезопасность",
-    "transcription": "/ˌsaɪ.bə.sɪˈkjʊə.rə.ti/",
-    "sentence": "Cybersecurity protects systems from attacks."
+    "word": "birthday",
+    "translation": "день рождения",
+    "transcription": "/ˈbɜːθ.deɪ/",
+    "sentence": "Happy birthday to you!"
   },
   {
-    "word": "data",
-    "translation": "данные",
-    "transcription": "/ˈdeɪ.tə/",
-    "sentence": "The data is stored on a secure server."
+    "word": "business",
+    "translation": "бизнес",
+    "transcription": "/ˈbɪz.nɪs/",
+    "sentence": "She runs her own business."
   },
   {
-    "word": "database",
-    "translation": "база данных",
-    "transcription": "/ˈdeɪ.tə.beɪs/",
-    "sentence": "The database contains user records."
+    "word": "celebration",
+    "translation": "празднование",
+    "transcription": "/ˌsel.ɪˈbreɪ.ʃən/",
+    "sentence": "The celebration lasted all night."
   },
   {
-    "word": "debug",
-    "translation": "отлаживать",
-    "transcription": "/ˌdiːˈbʌɡ/",
-    "sentence": "I need to debug this program."
+    "word": "challenge",
+    "translation": "вызов",
+    "transcription": "/ˈtʃæl.ɪndʒ/",
+    "sentence": "This task is a real challenge."
   },
   {
-    "word": "device",
-    "translation": "устройство",
-    "transcription": "/dɪˈvaɪs/",
-    "sentence": "This device connects to Wi-Fi."
+    "word": "character",
+    "translation": "характер",
+    "transcription": "/ˈkær.ək.tər/",
+    "sentence": "He has a strong character."
   },
   {
-    "word": "digital",
-    "translation": "цифровой",
-    "transcription": "/ˈdɪdʒ.ɪ.təl/",
-    "sentence": "We live in a digital world."
-  },
-  {
-    "word": "encryption",
-    "translation": "шифрование",
-    "transcription": "/ɪnˈkrɪp.ʃən/",
-    "sentence": "Encryption keeps messages private."
-  },
-  {
-    "word": "engineer",
-    "translation": "инженер",
-    "transcription": "/ˌen.dʒɪˈnɪər/",
-    "sentence": "She works as a software engineer."
-  },
-  {
-    "word": "file",
-    "translation": "файл",
-    "transcription": "/faɪl/",
-    "sentence": "Please save the file before closing."
-  },
-  {
-    "word": "firewall",
-    "translation": "межсетевой экран",
-    "transcription": "/ˈfaɪə.wɔːl/",
-    "sentence": "The firewall blocks suspicious traffic."
-  },
-  {
-    "word": "framework",
-    "translation": "фреймворк",
-    "transcription": "/ˈfreɪm.wɜːk/",
-    "sentence": "We use a popular web framework."
-  },
-  {
-    "word": "function",
-    "translation": "функция",
-    "transcription": "/ˈfʌŋk.ʃən/",
-    "sentence": "This function returns a boolean value."
-  },
-  {
-    "word": "hardware",
-    "translation": "аппаратное обеспечение",
-    "transcription": "/ˈhɑːd.weər/",
-    "sentence": "The hardware is outdated."
-  },
-  {
-    "word": "interface",
-    "translation": "интерфейс",
-    "transcription": "/ˈɪn.tə.feɪs/",
-    "sentence": "The user interface is easy to use."
-  },
-  {
-    "word": "internet",
-    "translation": "интернет",
-    "transcription": "/ˈɪn.tə.net/",
-    "sentence": "The internet connects millions of devices."
-  },
-  {
-    "word": "kernel",
-    "translation": "ядро",
-    "transcription": "/ˈkɜː.nəl/",
-    "sentence": "The kernel manages system resources."
-  },
-  {
-    "word": "laptop",
-    "translation": "ноутбук",
-    "transcription": "/ˈlæp.tɒp/",
-    "sentence": "I take my laptop to every lecture."
-  },
-  {
-    "word": "library",
-    "translation": "библиотека",
-    "transcription": "/ˈlaɪ.brər.i/",
-    "sentence": "This library provides useful functions."
-  },
-  {
-    "word": "loop",
-    "translation": "цикл",
-    "transcription": "/luːp/",
-    "sentence": "The loop repeats ten times."
-  },
-  {
-    "word": "machine",
-    "translation": "машина",
-    "transcription": "/məˈʃiːn/",
-    "sentence": "The machine learning model predicts prices."
-  },
-  {
-    "word": "memory",
-    "translation": "память",
-    "transcription": "/ˈmem.ər.i/",
-    "sentence": "The program uses too much memory."
-  },
-  {
-    "word": "module",
-    "translation": "модуль",
-    "transcription": "/ˈmɒd.juːl/",
-    "sentence": "Each module has a specific task."
-  },
-  {
-    "word": "network",
-    "translation": "сеть",
-    "transcription": "/ˈnet.wɜːk/",
-    "sentence": "The university network is very fast."
-  },
-  {
-    "word": "operating",
-    "translation": "операционный",
-    "transcription": "/ˈɒp.ər.eɪ.tɪŋ/",
-    "sentence": "The operating system controls the hardware."
-  },
-  {
-    "word": "packet",
-    "translation": "пакет",
-    "transcription": "/ˈpæk.ɪt/",
-    "sentence": "A packet travels across the network."
-  },
-  {
-    "word": "password",
-    "translation": "пароль",
-    "transcription": "/ˈpɑːs.wɜːd/",
-    "sentence": "Choose a strong password."
-  },
-  {
-    "word": "platform",
-    "translation": "платформа",
-    "transcription": "/ˈplæt.fɔːm/",
-    "sentence": "The platform supports many programming languages."
-  },
-  {
-    "word": "program",
-    "translation": "программа",
-    "transcription": "/ˈprəʊ.ɡræm/",
-    "sentence": "This program solves mathematical equations."
-  },
-  {
-    "word": "protocol",
-    "translation": "протокол",
-    "transcription": "/ˈprəʊ.tə.kɒl/",
-    "sentence": "HTTP is a common network protocol."
-  },
-  {
-    "word": "query",
-    "translation": "запрос",
-    "transcription": "/ˈkwɪə.ri/",
-    "sentence": "The query returns all students."
-  },
-  {
-    "word": "recursion",
-    "translation": "рекурсия",
-    "transcription": "/rɪˈkɜː.ʒən/",
-    "sentence": "Recursion can simplify complex problems."
-  },
-  {
-    "word": "repository",
-    "translation": "репозиторий",
-    "transcription": "/rɪˈpɒz.ɪ.tər.i/",
-    "sentence": "We pushed the code to the repository."
-  },
-  {
-    "word": "robot",
-    "translation": "робот",
-    "transcription": "/ˈrəʊ.bɒt/",
-    "sentence": "The robot can move autonomously."
-  },
-  {
-    "word": "router",
-    "translation": "маршрутизатор",
-    "transcription": "/ˈruː.tər/",
-    "sentence": "The router connects us to the internet."
-  },
-  {
-    "word": "server",
-    "translation": "сервер",
-    "transcription": "/ˈsɜː.vər/",
-    "sentence": "The server is down for maintenance."
-  },
-  {
-    "word": "software",
-    "translation": "программное обеспечение",
-    "transcription": "/ˈsɒft.weər/",
-    "sentence": "We need to install new software."
-  },
-  {
-    "word": "source",
-    "translation": "исходный код",
-    "transcription": "/sɔːs/",
-    "sentence": "The source code is available online."
-  },
-  {
-    "word": "storage",
-    "translation": "хранилище",
-    "transcription": "/ˈstɔː.rɪdʒ/",
-    "sentence": "Cloud storage is convenient."
-  },
-  {
-    "word": "syntax",
-    "translation": "синтаксис",
-    "transcription": "/ˈsɪn.tæks/",
-    "sentence": "Python syntax is easy to read."
-  },
-  {
-    "word": "system",
-    "translation": "система",
-    "transcription": "/ˈsɪs.təm/",
-    "sentence": "The system crashed unexpectedly."
-  },
-  {
-    "word": "technology",
-    "translation": "технология",
-    "transcription": "/tekˈnɒl.ə.dʒi/",
-    "sentence": "Technology changes very quickly."
-  },
-  {
-    "word": "variable",
-    "translation": "переменная",
-    "transcription": "/ˈveə.ri.ə.bəl/",
-    "sentence": "Declare a variable before using it."
-  },
-  {
-    "word": "virtual",
-    "translation": "виртуальный",
-    "transcription": "/ˈvɜː.tʃu.əl/",
-    "sentence": "We created a virtual machine."
-  },
-  {
-    "word": "website",
-    "translation": "веб-сайт",
-    "transcription": "/ˈweb.saɪt/",
-    "sentence": "The website loads slowly."
-  },
-  {
-    "word": "wireless",
-    "translation": "беспроводной",
-    "transcription": "/ˈwaɪə.ləs/",
-    "sentence": "The wireless connection is unstable."
-  },
-  {
-    "word": "abstraction",
-    "translation": "абстракция",
-    "transcription": "/æbˈstræk.ʃən/",
-    "sentence": "Abstraction hides complex details."
-  },
-  {
-    "word": "access",
-    "translation": "доступ",
-    "transcription": "/ˈæk.ses/",
-    "sentence": "Only administrators have access to this folder."
-  },
-  {
-    "word": "address",
-    "translation": "адрес",
-    "transcription": "/əˈdres/",
-    "sentence": "Each device has a unique IP address."
-  },
-  {
-    "word": "administrator",
-    "translation": "администратор",
-    "transcription": "/ədˈmɪn.ɪ.streɪ.tər/",
-    "sentence": "The administrator can reset your password."
-  },
-  {
-    "word": "analytics",
-    "translation": "аналитика",
-    "transcription": "/ˌæn.əˈlɪt.ɪks/",
-    "sentence": "Data analytics helps us understand users."
-  },
-  {
-    "word": "annotation",
-    "translation": "аннотация",
-    "transcription": "/ˌæn.əˈteɪ.ʃən/",
-    "sentence": "The code contains helpful annotations."
-  },
-  {
-    "word": "architecture",
-    "translation": "архитектура",
-    "transcription": "/ˈɑː.kɪ.tek.tʃər/",
-    "sentence": "The software architecture is well designed."
-  },
-  {
-    "word": "argument",
-    "translation": "аргумент",
-    "transcription": "/ˈɑː.ɡjə.mənt/",
-    "sentence": "The function takes two arguments."
-  },
-  {
-    "word": "assembly",
-    "translation": "ассемблер",
-    "transcription": "/əˈsem.bli/",
-    "sentence": "Assembly language is close to machine code."
-  },
-  {
-    "word": "attribute",
-    "translation": "атрибут",
-    "transcription": "/ˈæt.rɪ.bjuːt/",
-    "sentence": "Each object has several attributes."
-  },
-  {
-    "word": "authentication",
-    "translation": "аутентификация",
-    "transcription": "/ɔːˌθen.tɪˈkeɪ.ʃən/",
-    "sentence": "Two-factor authentication improves security."
-  },
-  {
-    "word": "backup",
-    "translation": "резервная копия",
-    "transcription": "/ˈbæk.ʌp/",
-    "sentence": "Always make a backup of your data."
-  },
-  {
-    "word": "benchmark",
-    "translation": "тест производительности",
-    "transcription": "/ˈbentʃ.mɑːk/",
-    "sentence": "The benchmark measures CPU speed."
-  },
-  {
-    "word": "boolean",
-    "translation": "логический",
-    "transcription": "/ˈbuː.li.ən/",
-    "sentence": "The boolean variable is either true or false."
-  },
-  {
-    "word": "branch",
-    "translation": "ветка",
-    "transcription": "/brɑːntʃ/",
-    "sentence": "Create a new branch for your feature."
-  },
-  {
-    "word": "browser",
-    "translation": "браузер",
-    "transcription": "/ˈbraʊ.zər/",
-    "sentence": "Open the link in your browser."
-  },
-  {
-    "word": "bug",
-    "translation": "ошибка",
-    "transcription": "/bʌɡ/",
-    "sentence": "We found a bug in the code."
-  },
-  {
-    "word": "bus",
-    "translation": "шина",
-    "transcription": "/bʌs/",
-    "sentence": "The data bus transfers information between components."
-  },
-  {
-    "word": "capacity",
-    "translation": "ёмкость",
-    "transcription": "/kəˈpæs.ə.ti/",
-    "sentence": "The disk capacity is two terabytes."
-  },
-  {
-    "word": "certificate",
-    "translation": "сертификат",
-    "transcription": "/səˈtɪf.ɪ.kət/",
-    "sentence": "The website has a valid SSL certificate."
-  },
-  {
-    "word": "circuit",
-    "translation": "схема",
-    "transcription": "/ˈsɜː.kɪt/",
-    "sentence": "The circuit board is damaged."
-  },
-  {
-    "word": "class",
-    "translation": "класс",
-    "transcription": "/klɑːs/",
-    "sentence": "This class represents a student."
-  },
-  {
-    "word": "client",
-    "translation": "клиент",
-    "transcription": "/ˈklaɪ.ənt/",
-    "sentence": "The client sends a request to the server."
-  },
-  {
-    "word": "command",
-    "translation": "команда",
-    "transcription": "/kəˈmɑːnd/",
-    "sentence": "Type this command in the terminal."
+    "word": "comfortable",
+    "translation": "удобный",
+    "transcription": "/ˈkʌmf.tə.bəl/",
+    "sentence": "This chair is very comfortable."
   },
   {
     "word": "communication",
-    "translation": "связь",
+    "translation": "общение",
     "transcription": "/kəˌmjuː.nɪˈkeɪ.ʃən/",
-    "sentence": "Good communication is important in IT projects."
+    "sentence": "Good communication is important."
   },
   {
-    "word": "complexity",
-    "translation": "сложность",
-    "transcription": "/kəmˈplek.sə.ti/",
-    "sentence": "The algorithm has low complexity."
+    "word": "community",
+    "translation": "сообщество",
+    "transcription": "/kəˈmjuː.nə.ti/",
+    "sentence": "Our community is very friendly."
   },
   {
-    "word": "component",
-    "translation": "компонент",
-    "transcription": "/kəmˈpəʊ.nənt/",
-    "sentence": "Each component can be tested separately."
+    "word": "competition",
+    "translation": "соревнование",
+    "transcription": "/ˌkɒm.pəˈtɪʃ.ən/",
+    "sentence": "She won the competition."
   },
   {
-    "word": "compression",
-    "translation": "сжатие",
-    "transcription": "/kəmˈpreʃ.ən/",
-    "sentence": "File compression saves disk space."
+    "word": "completely",
+    "translation": "полностью",
+    "transcription": "/kəmˈpliːt.li/",
+    "sentence": "I completely forgot about it."
   },
   {
-    "word": "condition",
-    "translation": "условие",
-    "transcription": "/kənˈdɪʃ.ən/",
-    "sentence": "The loop stops when the condition is false."
-  },
-  {
-    "word": "configuration",
-    "translation": "конфигурация",
-    "transcription": "/kənˌfɪɡ.əˈreɪ.ʃən/",
-    "sentence": "Check the server configuration."
+    "word": "confidence",
+    "translation": "уверенность",
+    "transcription": "/ˈkɒn.fɪ.dəns/",
+    "sentence": "He lacks confidence in himself."
   },
   {
     "word": "connection",
     "translation": "соединение",
     "transcription": "/kəˈnek.ʃən/",
-    "sentence": "The connection timed out."
+    "sentence": "The internet connection is slow."
   },
   {
-    "word": "console",
-    "translation": "консоль",
-    "transcription": "/kənˈsəʊl/",
-    "sentence": "The error appears in the console."
+    "word": "conversation",
+    "translation": "разговор",
+    "transcription": "/ˌkɒn.vəˈseɪ.ʃən/",
+    "sentence": "We had a long conversation."
   },
   {
-    "word": "constant",
-    "translation": "константа",
-    "transcription": "/ˈkɒn.stənt/",
-    "sentence": "Define the constant at the top of the file."
+    "word": "decision",
+    "translation": "решение",
+    "transcription": "/dɪˈsɪʒ.ən/",
+    "sentence": "It was a difficult decision."
   },
   {
-    "word": "container",
-    "translation": "контейнер",
-    "transcription": "/kənˈteɪ.nər/",
-    "sentence": "Docker uses containers to run applications."
+    "word": "delicious",
+    "translation": "вкусный",
+    "transcription": "/dɪˈlɪʃ.əs/",
+    "sentence": "The cake was delicious."
   },
   {
-    "word": "control",
-    "translation": "управление",
-    "transcription": "/kənˈtrəʊl/",
-    "sentence": "Version control helps track changes."
+    "word": "different",
+    "translation": "другой",
+    "transcription": "/ˈdɪf.ər.ənt/",
+    "sentence": "They are very different people."
   },
   {
-    "word": "conversion",
-    "translation": "преобразование",
-    "transcription": "/kənˈvɜː.ʃən/",
-    "sentence": "Data conversion can cause errors."
+    "word": "difficult",
+    "translation": "трудный",
+    "transcription": "/ˈdɪf.ɪ.kəlt/",
+    "sentence": "This question is difficult."
   },
   {
-    "word": "cookie",
-    "translation": "cookie-файл",
-    "transcription": "/ˈkʊk.i/",
-    "sentence": "The website stores cookies in your browser."
+    "word": "direction",
+    "translation": "направление",
+    "transcription": "/dɪˈrek.ʃən/",
+    "sentence": "We are going in the wrong direction."
   },
   {
-    "word": "core",
-    "translation": "ядро",
-    "transcription": "/kɔːr/",
-    "sentence": "The processor has eight cores."
+    "word": "education",
+    "translation": "образование",
+    "transcription": "/ˌedʒ.ʊˈkeɪ.ʃən/",
+    "sentence": "Education is important for everyone."
   },
   {
-    "word": "crash",
-    "translation": "сбой",
-    "transcription": "/kræʃ/",
-    "sentence": "The system crash lost our data."
+    "word": "elephant",
+    "translation": "слон",
+    "transcription": "/ˈel.ɪ.fənt/",
+    "sentence": "The elephant is a huge animal."
   },
   {
-    "word": "cursor",
-    "translation": "курсор",
-    "transcription": "/ˈkɜː.sər/",
-    "sentence": "Move the cursor to the next line."
+    "word": "emergency",
+    "translation": "чрезвычайная ситуация",
+    "transcription": "/ɪˈmɜː.dʒən.si/",
+    "sentence": "In an emergency, call 911."
+  },
+  {
+    "word": "environment",
+    "translation": "окружающая среда",
+    "transcription": "/ɪnˈvaɪ.rən.mənt/",
+    "sentence": "We must protect the environment."
+  },
+  {
+    "word": "everything",
+    "translation": "всё",
+    "transcription": "/ˈev.ri.θɪŋ/",
+    "sentence": "Everything is going to be fine."
+  },
+  {
+    "word": "experience",
+    "translation": "опыт",
+    "transcription": "/ɪkˈspɪə.ri.əns/",
+    "sentence": "She has a lot of experience."
+  },
+  {
+    "word": "explanation",
+    "translation": "объяснение",
+    "transcription": "/ˌek.spləˈneɪ.ʃən/",
+    "sentence": "Thank you for the explanation."
+  },
+  {
+    "word": "family",
+    "translation": "семья",
+    "transcription": "/ˈfæm.əl.i/",
+    "sentence": "My family lives in Moscow."
+  },
+  {
+    "word": "favorite",
+    "translation": "любимый",
+    "transcription": "/ˈfeɪ.vər.ɪt/",
+    "sentence": "This is my favorite song."
+  },
+  {
+    "word": "festival",
+    "translation": "фестиваль",
+    "transcription": "/ˈfes.tɪ.vəl/",
+    "sentence": "The music festival was amazing."
+  },
+  {
+    "word": "freedom",
+    "translation": "свобода",
+    "transcription": "/ˈfriː.dəm/",
+    "sentence": "Freedom is important."
+  },
+  {
+    "word": "friendship",
+    "translation": "дружба",
+    "transcription": "/ˈfrend.ʃɪp/",
+    "sentence": "Our friendship is strong."
+  },
+  {
+    "word": "furniture",
+    "translation": "мебель",
+    "transcription": "/ˈfɜː.nɪ.tʃər/",
+    "sentence": "We bought new furniture."
+  },
+  {
+    "word": "generation",
+    "translation": "поколение",
+    "transcription": "/ˌdʒen.əˈreɪ.ʃən/",
+    "sentence": "The younger generation loves technology."
+  },
+  {
+    "word": "government",
+    "translation": "правительство",
+    "transcription": "/ˈɡʌv.ən.mənt/",
+    "sentence": "The government announced new rules."
+  },
+  {
+    "word": "happiness",
+    "translation": "счастье",
+    "transcription": "/ˈhæp.i.nəs/",
+    "sentence": "Money cannot buy happiness."
+  },
+  {
+    "word": "history",
+    "translation": "история",
+    "transcription": "/ˈhɪs.tər.i/",
+    "sentence": "I love reading history."
+  },
+  {
+    "word": "holiday",
+    "translation": "праздник",
+    "transcription": "/ˈhɒl.ə.deɪ/",
+    "sentence": "We are going on holiday next week."
+  },
+  {
+    "word": "hospital",
+    "translation": "больница",
+    "transcription": "/ˈhɒs.pɪ.təl/",
+    "sentence": "She works at the hospital."
+  },
+  {
+    "word": "imagination",
+    "translation": "воображение",
+    "transcription": "/ɪˌmædʒ.ɪˈneɪ.ʃən/",
+    "sentence": "Children have a vivid imagination."
+  },
+  {
+    "word": "important",
+    "translation": "важный",
+    "transcription": "/ɪmˈpɔː.tənt/",
+    "sentence": "This is an important message."
+  },
+  {
+    "word": "information",
+    "translation": "информация",
+    "transcription": "/ˌɪn.fəˈmeɪ.ʃən/",
+    "sentence": "I need more information."
+  },
+  {
+    "word": "interesting",
+    "translation": "интересный",
+    "transcription": "/ˈɪn.trəs.tɪŋ/",
+    "sentence": "The book is very interesting."
+  },
+  {
+    "word": "knowledge",
+    "translation": "знание",
+    "transcription": "/ˈnɒl.ɪdʒ/",
+    "sentence": "Knowledge is power."
+  },
+  {
+    "word": "language",
+    "translation": "язык",
+    "transcription": "/ˈlæŋ.ɡwɪdʒ/",
+    "sentence": "English is a global language."
+  },
+  {
+    "word": "medicine",
+    "translation": "лекарство",
+    "transcription": "/ˈmed.ɪ.sən/",
+    "sentence": "Take your medicine after lunch."
+  },
+  {
+    "word": "memory",
+    "translation": "память",
+    "transcription": "/ˈmem.ər.i/",
+    "sentence": "I have a bad memory for names."
   }
 ]
