@@ -387,7 +387,7 @@ curl -X POST "https://platform-api2.max.ru/subscriptions" \
   -H "Authorization: <ВАШ_ТОКЕН>" \
   -H "Content-Type: application/json" \
   -d '{
-    "url": "https://<ВАШ_ДОМЕН>/webhook",
+    "url": "https://<ВАШ_ДОМЕН>/",
     "update_types": ["message_created", "message_callback", "bot_started"]
   }' -k
 ```
@@ -665,7 +665,7 @@ docker compose exec nginx wget -qO- http://bot:8080/ || echo fail
 
 ```nginx
 location /webhook {
-    proxy_pass http://bot:8080/webhook;
+    proxy_pass http://bot:8080/;
 }
 ```
 
