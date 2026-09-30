@@ -702,7 +702,7 @@ async def _process_voice(event: MessageCreated):
 
 
     # если вложение есть, но не Audio — можно тоже ответить
-    await event.message.answer("Вложение не распознано как аудио или текст.")
+    await event.message.answer("Вложение не распознано как аудио или текст. Для помощи воспользуйтесь /help")
 
 
 
