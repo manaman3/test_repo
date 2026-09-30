@@ -412,7 +412,7 @@ curl -X POST "https://platform-api2.max.ru/subscriptions" \
 Основные пакеты (`requirements.txt`):
 
 ```
-maxapi @ git+https://github.com/max-messenger/max-botapi-python.git
+maxapi>=1.2.1
 faster-whisper>=1.1.0
 aiohttp>=3.12.14
 openai
