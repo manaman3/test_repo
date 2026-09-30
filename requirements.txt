@@ -1,4 +1,3 @@
-# --- Основные библиотеки ---
 maxapi @ git+https://github.com/max-messenger/max-botapi-python.git
 faster-whisper>=1.1.0
 aiohttp>=3.12.14
