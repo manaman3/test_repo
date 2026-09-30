@@ -363,6 +363,9 @@ update-ca-certificates
 > Ссылки периодически обновляются. Актуальные — на сайте Минцифры.
 
 ---
+кладем nginx, если он занимает порты
+sudo systemctl stop nginx
+sudo systemctl disable nginx   # чтобы не запускался после перезагрузки 
 
 ## 📂 Установка проекта
 
