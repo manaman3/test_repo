@@ -1,83 +1,44 @@
+# ------------------------------------------------------------------
+# Стандартная библиотека
+# ------------------------------------------------------------------
 import asyncio
-import logging
-from maxapi import Bot, Dispatcher, F
-from maxapi.context import MemoryContext, State, StatesGroup
-from maxapi.types import MessageCreated, Command, BotStarted
-import aiohttp
 import io
+import json
 import logging
-from maxapi.types.attachments.audio import Audio
-from maxapi.types import MessageCreated
-
-from maxapi import Bot, Dispatcher, F
-from maxapi.filters.callback_payload import CallbackPayload
-from maxapi.filters.command import CommandStart
-from maxapi.types import (
-    CallbackButton,
-    MessageCreated,
-    MessageCallback,
-)
-from maxapi.utils.inline_keyboard import InlineKeyboardBuilder
-
-
-
-import aiohttp
-import io
-
-import asyncio
-import logging
+import os
+import random
 from datetime import datetime, timezone
+from functools import lru_cache
 from typing import Optional
 
-from maxapi import Bot, Dispatcher, F
-from maxapi.context import MemoryContext, State, StatesGroup
-from maxapi.types import (
-    MessageCreated,
-    MessageCallback,
-    CallbackButton,
-    Command,
-)
-from maxapi.types.command import BotCommand
-from maxapi.utils.inline_keyboard import InlineKeyboardBuilder
-from maxapi.methods.set_commands import SetCommands
-# from sm_2 import Scheduler, Card
-from maxapi.types.attachments.audio import Audio
-
-
-import json
-import random
-from functools import lru_cache
-
-
-
-
-import ai_check
-
-
-
-import asyncio
-import io
+# ------------------------------------------------------------------
+# Сторонние библиотеки
+# ------------------------------------------------------------------
 import aiohttp
-from maxapi import Bot, Dispatcher, F
-from maxapi.types import MessageCreated
-from maxapi.types.attachments.audio import Audio
+from aiohttp import web
 from faster_whisper import WhisperModel
 
-
-
-
-
-import asyncio
-import os
-from aiohttp import web
-
-from maxapi import Bot, Dispatcher
-from maxapi.types import BotCommand
+from maxapi import Bot, Dispatcher, F
+from maxapi.context import MemoryContext, State, StatesGroup
+from maxapi.filters.callback_payload import CallbackPayload
+from maxapi.filters.command import CommandStart
 from maxapi.methods.set_commands import SetCommands
+from maxapi.types import (
+    BotCommand,
+    BotStarted,
+    CallbackButton,
+    Command,
+    MessageCallback,
+    MessageCreated,
+)
+from maxapi.types.attachments.audio import Audio
+from maxapi.types.command import BotCommand
+from maxapi.utils.inline_keyboard import InlineKeyboardBuilder
 
-
-
-import os
+# ------------------------------------------------------------------
+# Локальные модули
+# ------------------------------------------------------------------
+import ai_check
 
 
 
@@ -476,8 +437,6 @@ async def cmd_practice(event: MessageCreated):
 
 🔁 Начинаем проверку: 
 
-
-
 🇷🇺 {w['translation']}
 
 
@@ -572,7 +531,7 @@ async def _process_voice(event: MessageCreated):
         return                                 # не наше — молча выходим
 
 
-    if not voice.check_user(event.message.sender.user_id) or not voice.Scheck_user(event.message.sender.user_id): # type: ignore
+    if not voice.check_user(event.message.sender.user_id) and not voice.Scheck_user(event.message.sender.user_id): # type: ignore
         await event.message.answer("Вы уже не находитесь в режиме использующем голосовые сообщения")
         return
         
