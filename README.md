@@ -363,9 +363,7 @@ update-ca-certificates
 > Ссылки периодически обновляются. Актуальные — на сайте Минцифры.
 
 ---
-кладем nginx, если он занимает порты
-sudo systemctl stop nginx
-sudo systemctl disable nginx   # чтобы не запускался после перезагрузки 
+
 
 ## 📂 Установка проекта
 
@@ -379,6 +377,10 @@ nano .env
 docker compose up -d --build
 ```
 
+кладем nginx, если он занимает порты
+```bash
+sudo systemctl stop nginx
+sudo systemctl disable nginx   # чтобы не запускался после перезагрузки ```
 ---
 
 ## 🔗 Регистрация вебхука
