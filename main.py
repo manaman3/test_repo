@@ -333,7 +333,7 @@ async def cmd_start(event: MessageCreated):
 
 
 @dp.message_created(Command("help"))
-async def cmd_start(event: MessageCreated):
+async def cmd_help(event: MessageCreated):
     """
     Обработчик команды /start
     """
@@ -882,12 +882,10 @@ async def _process_voice(event: MessageCreated):
 async def main() -> None:
     # 1. Регистрируем команды
     commands_to_set = [
-        BotCommand(name="start",      description="🚀 Запустить бота и пройти онбординг"),
-        BotCommand(name="learn",      description="📖 Выбрать тему для изучения"),
+        BotCommand(name="start",      description="🚀 Запустить бота"),
+        BotCommand(name="learn",      description="📖 Начать изучение слов"),
         BotCommand(name="practice",   description="🔁 Начать сессию проверки слов"),
         BotCommand(name="sentence", description="📚 Проверка предложений"),
-        # BotCommand(name="progress",   description="📊 Мой прогресс"),
-        # BotCommand(name="remind",     description="⏰ Настроить напоминания"),
         BotCommand(name="help",       description="❓ Помощь и список команд"),
     ]
     setter = SetCommands(bot, commands=commands_to_set)
