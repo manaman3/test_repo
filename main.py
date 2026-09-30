@@ -474,7 +474,8 @@ async def cmd_practice(event: MessageCreated):
 
     voice.add_user(event.message.sender.user_id) # ignore
 
-    await event.message.answer("Вы выбрали режим проверки слов")
+    await event.message.answer("Вы выбрали режим проверки слов. Бот будет отправлять вам слова, а вы должны в голосовом сообщении сказать перевод."
+    "(для наилучшего качества распознавания делайте паузы во время записи соообщения)")
 
 
 
@@ -593,7 +594,7 @@ async def _process_voice(event: MessageCreated):
         # segments, info = model.transcribe(buffer, ...)
 
         # faster-whisper умеет работать с file-like объектами
-        await event.message.answer(f"Начало распознавания голосового сообщения(для наилучшего качаства распознавания делайте паузы во время записи соообщения)")
+        await event.message.answer(f"Начало распознавания голосового сообщения")
         segments, info = model.transcribe(
             buffer,
             language="en",          # можно не указывать — авто-детект
