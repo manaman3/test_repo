@@ -7,15 +7,13 @@ import json
 import logging
 import os
 import random
-from datetime import datetime, timezone
 from functools import lru_cache
-from typing import Optional
+
 
 # ------------------------------------------------------------------
 # Сторонние библиотеки
 # ------------------------------------------------------------------
 import aiohttp
-from aiohttp import web
 from faster_whisper import WhisperModel
 
 from maxapi import Bot, Dispatcher, F
@@ -561,7 +559,7 @@ async def _process_voice(event: MessageCreated):
         if event.message.body and event.message.body.text:
 
     #####   
-            text = event.message.body.text.lower()
+            text = event.message.body.text
 
 
             if voice.check_user(event.message.sender.user_id): # type: ignore
