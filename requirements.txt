@@ -1,16 +1,6 @@
 # --- Основные библиотеки ---
-maxapi>=1.2.1
+maxapi @ git+https://github.com/max-messenger/max-botapi-python.git
 faster-whisper>=1.1.0
 aiohttp>=3.12.14
 openai
-# --- Зависимости faster-whisper (подтянутся автоматически, но можно зафиксировать) ---
-av>=11.0.0
-ctranslate2>=4.0.0,<5.0.0
-huggingface-hub>=0.21.0
-onnxruntime>=1.14.0,<2.0.0
-tokenizers>=0.13.0,<1.0.0
-tqdm
-sm-2
-
-# --- Опционально, если используете .env ---
 python-dotenv>=1.0.0
