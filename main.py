@@ -362,7 +362,7 @@ async def cmd_learn(event: MessageCreated):
     w = random_word()
     await event.message.answer(f"""
 
-🔁 Начинаем повторение: 
+🔁 Начинаем изучение: 
 
 📖 {w['word']}
 🔊 {w['transcription']}
@@ -574,7 +574,7 @@ async def _process_voice(event: MessageCreated):
                 w = random_word()
                 await event.message.answer(f"""
 🔁 Следующее слово: 
-🇷🇺 {w['word']}
+🇷🇺 {w['translation']}
                 """)
                 print(f"{w['word']}")
                 print(f"→ {w['translation']}")
