@@ -520,8 +520,8 @@ async def download_audio_to_memory(attachment: Audio) -> io.BytesIO:
 async def handle_voice(event: MessageCreated):
     """Лёгкий хендлер: сразу отвечает MAX'у 200, работа — в фоне."""
     body = event.message.body
-    if not body or not body.attachments:
-        return
+    # if not body or not body.attachments:
+    #     return
     asyncio.create_task(_process_voice(event))
 
 
