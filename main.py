@@ -43,6 +43,48 @@ from maxapi.methods.set_commands import SetCommands
 # from sm_2 import Scheduler, Card
 from maxapi.types.attachments.audio import Audio
 
+
+import json
+import random
+from functools import lru_cache
+
+
+
+
+import ai_check
+
+
+
+import asyncio
+import io
+import aiohttp
+from maxapi import Bot, Dispatcher, F
+from maxapi.types import MessageCreated
+from maxapi.types.attachments.audio import Audio
+from faster_whisper import WhisperModel
+
+
+
+
+
+import asyncio
+import os
+from aiohttp import web
+
+from maxapi import Bot, Dispatcher
+from maxapi.types import BotCommand
+from maxapi.methods.set_commands import SetCommands
+
+
+
+import os
+
+
+
+
+
+
+
 print("123")
 
 
@@ -80,46 +122,49 @@ class Voice():
         
 
 
-    def remove_user(self, id):
-        pass
+    # def remove_user(self, id):
+    #     pass
+
+
+    def remove_user(self, id) -> None:
+        """Удаляет пользователя из списков users и users_sent, если он там есть."""
+        if id in self.users:
+            self.users.remove(id)
+
+
+
+    def Sremove_user(self, id) -> None:
+        """Удаляет пользователя из списков users и users_sent, если он там есть."""
+
+        if id in self.users_sent:
+            self.users_sent.remove(id)
+
+
+    def Scheck_user(self, id):
+        if id in self.users_sent:
+            return True
+        return False
+
+    def Sadd_user(self, id):
+        if id not in self.users_sent:
+            self.users_sent.append(id)
+
+    
+        
+
+
+    def remove_word(self, word_id) -> None:
+        """Удаляет слово из словаря по его id."""
+        if word_id in self.words:
+            del self.words[word_id]
+
+
+
+
 
 
 voice = Voice()
 
-import json
-import random
-from functools import lru_cache
-
-
-
-
-
-
-
-
-import asyncio
-import io
-import aiohttp
-from maxapi import Bot, Dispatcher, F
-from maxapi.types import MessageCreated
-from maxapi.types.attachments.audio import Audio
-from faster_whisper import WhisperModel
-
-
-
-
-
-import asyncio
-import os
-from aiohttp import web
-
-from maxapi import Bot, Dispatcher
-from maxapi.types import BotCommand
-from maxapi.methods.set_commands import SetCommands
-
-
-
-import os
 
 TOKEN = os.getenv("MAX_BOT_TOKEN")
 if not TOKEN:
@@ -236,26 +281,6 @@ async def is_in_dialog(context: MemoryContext) -> bool:
     current = await context.get_state()
     return current is not None
 
-# # ──────────────────────────────────────────────
-# # /start — точка входа
-# # ──────────────────────────────────────────────
-# @dp.message_created(Command('start'))
-# async def start(event: MessageCreated, context: MemoryContext):
-#     # Если пользователь уже в диалоге — не сбрасываем его молча
-#     if await is_in_dialog(context):
-#         await event.message.answer(
-#             "⚠️ Вы уже находитесь в активном диалоге.\n"
-#             "Завершите его или отправьте /cancel, чтобы начать заново."
-#         )
-#         return
-
-#     await event.message.answer(
-#         "Выберите режим работы:\n"
-#         "1️⃣ — Текстовый диалог\n"
-#         "2️⃣ — Голосовой диалог\n\n"
-#         "Отправьте «1» или «2»."
-#     )
-
 
 
 
@@ -269,61 +294,20 @@ async def is_in_dialog(context: MemoryContext) -> bool:
 @dp.bot_started()
 async def bot_started(event: BotStarted):
 
-
-    kb = InlineKeyboardBuilder()
-    kb.row(
-        CallbackButton(
-            text="Школьник",
-            payload=SchoolPayload(foo="123", action="edit").pack(),
-        ),
-        CallbackButton(
-            text="Студент",
-            payload=StudentPayload(bar="abc", value=42).pack(),
-        ),
-    )
-    # await event.message.answer("Нажми кнопку!", attachments=[kb.as_markup()])
-
-
-
-
     await bot.send_message(
         chat_id=event.chat_id,
         text="""
-Привет! 👋
-Я бот для изучения английского языка. Все режимы бесплатны.
+👋 Привет! Я — тренажёр лексики изучения английского.
 
-Давай настроим обучение под тебя.
-Выбери свой уровень английского:
+Что я умею:
+• 📖 Давать слова для изучения
+• 🔁 Проверять их с помощью голосовых сообщений
+• 📊 Проверять правильность составления предложения
 
-
-
-Нажми на кнопку ниже 👇
-
-""", attachments=[kb.as_markup()])
-
-
-
-@dp.message_callback(SchoolPayload.filter())
-async def on_first_callback(event: MessageCallback, payload: SchoolPayload):
-    await event.answer(
-        new_text=f"Вы выбрали уровень школьника"
-    )
-
-
-    #### логика сохранения уровня в бд (redis)
-
-
-
-@dp.message_callback(StudentPayload.filter())
-async def on_second_callback(event: MessageCallback, payload: StudentPayload):
-    await event.answer(
-        new_text=f"Вы выбрали уровень студента"
-    )
-
-
-    #### логика сохранения уровня в бд (redis)
-
-
+Начни с /learn, чтобы начать изучение, или /practice, чтобы перейти к проверке 
+Для предложений используйте /sentence 
+Если что-то непонятно к вашему распоряжению /help
+""")
 
 
 
@@ -331,17 +315,14 @@ async def on_second_callback(event: MessageCallback, payload: StudentPayload):
 async def cmd_start(event: MessageCreated):
     """
     Обработчик команды /start
-    commands_info: 🚀 Запустить бота и пройти онбординг
     """
-
-
-
-
+    voice.remove_user(event.message.sender.user_id)
+    voice.Sremove_user(event.message.sender.user_id)
     await event.message.answer(
         "👋 Привет! Я — тренажёр лексики изучения английского.\n\n"
         "Что я умею:\n"
         "• 📖 Давать слова для изучения\n"
-        "• 🔁 Проверять их с помощью голосовых\n"
+        "• 🔁 Проверять их с помощью голосовых сообщений\n"
         "• 📊 Проверять правильность составления предложения\n\n"
         "Начни с /learn, чтобы начать изучение, или /practice, чтобы перейти к проверке " \
         "Для предложений используйте /sentence "
@@ -351,15 +332,34 @@ async def cmd_start(event: MessageCreated):
 
 
 
-    # await event.message.answer(
-    #     "👋 Привет! Я — тренажёр лексики изучения английского.\n\n"
-    #     "Что я умею:\n"
-    #     "• 📖 Подбирать слова по экзаменационным темам\n"
-    #     "• 🔁 Повторять их по системе интервального повторения\n"
-    #     "• 📊 Показывать твой прогресс\n\n"
-    #     "Начни с /topics, чтобы выбрать тему, или /review, чтобы повторить слова."
-    # )
+@dp.message_created(Command("help"))
+async def cmd_start(event: MessageCreated):
+    """
+    Обработчик команды /start
+    """
+    voice.remove_user(event.message.sender.user_id)
+    voice.Sremove_user(event.message.sender.user_id)
+    await event.message.answer("""
+📚 Помощь
 
+Я помогу учить английский: слова, перевод, предложения.
+А также дам AI рекомендации и распознаю ваши голосовые.
+
+Режимы:
+📖 Учить слова
+🔤 Проверка слов
+✍️ Составить предложение
+
+
+
+Команды:
+/start — начать сначала
+/learn — учить слова
+/practice — проверить слова
+/sentence — составить и проверить предложение
+/help — помощь
+
+Всё бесплатно.""")
 
 
 
@@ -371,6 +371,8 @@ async def cmd_learn(event: MessageCreated):
     """
 
     """
+    voice.remove_user(event.message.sender.user_id)
+    voice.Sremove_user(event.message.sender.user_id)
     await event.message.answer("Вы выбрали режим изучения слов")
 
 
@@ -401,17 +403,6 @@ async def cmd_learn(event: MessageCreated):
     print(f"Пример: {w['sentence']}")
 
         
-
-    # import json
-    # import random
-
-    # with open("words.json", "r", encoding="utf-8") as f:
-    #     data = json.load(f)
-
-    # words = data["words"]
-    # print(random.choice(words))
-
-
 
 
 
@@ -466,7 +457,7 @@ async def cmd_practice(event: MessageCreated):
     """
 
     """
-    
+    voice.Sremove_user(event.message.sender.user_id)
     if voice.check_user(event.message.sender.user_id): # ignore
         await event.message.answer("Вы уже находитесь в режиме проверки слов")
         return
@@ -499,14 +490,6 @@ async def cmd_practice(event: MessageCreated):
     voice.words[event.message.sender.user_id] = w['word']
         
 
-    # import json
-    # import random
-
-    # with open("words.json", "r", encoding="utf-8") as f:
-    #     data = json.load(f)
-
-    # words = data["words"]
-    # print(random.choice(words))
 
 
 
@@ -514,19 +497,38 @@ async def cmd_practice(event: MessageCreated):
 
 
 
+@dp.message_created(Command("sentence"))
+async def cmd_practice(event: MessageCreated):
+    """
 
-@dp.message_callback(F.callback.payload.startswith("next_practice_word"))
-async def practice_callback_word(event: MessageCallback, context: MemoryContext) -> None:
-    print("fewgerger")
+    """
+    voice.remove_user(event.message.sender.user_id)
+    
+    if voice.Scheck_user(event.message.sender.user_id): # ignore
+        await event.message.answer("Вы уже находитесь в режиме составления предложения")
+        returnS
+        
+
+    voice.Sadd_user(event.message.sender.user_id) # ignore
+
+    await event.message.answer("Вы выбрали режим составления предложения. Бот будет отправлять вам слова, а вы должны придумать предложение и отправить его голосовым сообщением."
+    "(для наилучшего качества распознавания делайте паузы во время записи соообщения)")
+
+
 
 
     w = random_word()
-    await event.edit(f"""
-🔁 Начинаем проверку: 
+    await event.message.answer(f"""
+🔁 Составьте предложение с этим словом: 
 🇷🇺 {w['translation']}
             """)
     print(f"{w['word']}")
     print(f"→ {w['translation']}")
+
+
+    voice.words[event.message.sender.user_id] = w['word']
+        
+
 
 
         
@@ -570,7 +572,7 @@ async def _process_voice(event: MessageCreated):
         return                                 # не наше — молча выходим
 
 
-    if not voice.check_user(event.message.sender.user_id): # ignore
+    if not voice.check_user(event.message.sender.user_id) or not voice.Scheck_user(event.message.sender.user_id): # ignore
         await event.message.answer("Вы уже не находитесь в режиме использующем голосовые сообщения")
         return
         
@@ -616,7 +618,7 @@ async def _process_voice(event: MessageCreated):
 
             w = random_word()
             await event.message.answer(f"""
-🔁 Начинаем проверку: 
+🔁 Следующее слово: 
 🇷🇺 {w['translation']}
             """)
             print(f"{w['word']}")
@@ -624,6 +626,27 @@ async def _process_voice(event: MessageCreated):
 
 
             voice.words[event.message.sender.user_id] = w['word']
+
+        else:
+            ## AI
+            await event.message.answer(str(ai_check.check_sentence(sentence=text, word=voice.words[event.message.sender.user_id]))
+
+            w = random_word()
+            await event.message.answer(f"""
+🔁 Составьте предложение с этим словом: 
+🇷🇺 {w['translation']}
+            """)
+            print(f"{w['word']}")
+            print(f"→ {w['translation']}")
+
+
+            voice.words[event.message.sender.user_id] = w['word']
+
+
+
+
+
+
 
 
 
