@@ -534,11 +534,8 @@ async def _process_voice(event: MessageCreated):
         return
 
 
-    await event.message.answer('1')
     if not body or not body.attachments:
-        await event.message.answer('2')
         if event.message.body and event.message.body.text:
-            await event.message.answer('3')
 
     #####   
             text = event.message.body.text.lower()
@@ -553,8 +550,8 @@ async def _process_voice(event: MessageCreated):
 
                 w = random_word()
                 await event.message.answer(f"""
-    🔁 Следующее слово: 
-    🇷🇺 {w['translation']}
+🔁 Следующее слово: 
+🇷🇺 {w['translation']}
                 """)
                 print(f"{w['word']}")
                 print(f"→ {w['translation']}")
@@ -576,8 +573,8 @@ async def _process_voice(event: MessageCreated):
 
                 w = random_word()
                 await event.message.answer(f"""
-    🔁 Составьте предложение с этим словом: 
-    🇷🇺 {w['word']}
+🔁 Составьте предложение с этим словом: 
+🇷🇺 {w['word']}
                 """)
                 print(f"{w['word']}")
                 print(f"→ {w['translation']}")
