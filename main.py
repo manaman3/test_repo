@@ -502,7 +502,7 @@ async def cmd_sentence(event: MessageCreated):
     w = random_word()
     await event.message.answer(f"""
 🔁 Составьте предложение с этим словом: 
-🇷🇺 {w['translation']}
+🇷🇺 {w['word']}
             """)
     print(f"{w['word']}")
     print(f"→ {w['translation']}")
