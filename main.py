@@ -590,7 +590,7 @@ async def _process_voice(event: MessageCreated):
             ## AI
 
 
-            result = ai_check.check_sentence(sentence=text, word=voice.words[event.message.sender.user_id])
+            result = ai_check.check_sentence(sentence=text, word=voice.words[event.message.sender.user_id]) # type: ignore
 
 
             result = ai_check.format_result(result, text)
@@ -601,7 +601,7 @@ async def _process_voice(event: MessageCreated):
             w = random_word()
             await event.message.answer(f"""
 🔁 Составьте предложение с этим словом: 
-🇷🇺 {w['translation']}
+🇷🇺 {w['word']}
             """)
             print(f"{w['word']}")
             print(f"→ {w['translation']}")
