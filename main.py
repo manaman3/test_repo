@@ -316,8 +316,8 @@ async def cmd_start(event: MessageCreated):
     """
     Обработчик команды /start
     """
-    voice.remove_user(event.message.sender.user_id)
-    voice.Sremove_user(event.message.sender.user_id)
+    voice.remove_user(event.message.sender.user_id) # type: ignore
+    voice.Sremove_user(event.message.sender.user_id) # type: ignore
     await event.message.answer(
         "👋 Привет! Я — тренажёр лексики изучения английского.\n\n"
         "Что я умею:\n"
@@ -337,8 +337,8 @@ async def cmd_help(event: MessageCreated):
     """
     Обработчик команды /start
     """
-    voice.remove_user(event.message.sender.user_id)
-    voice.Sremove_user(event.message.sender.user_id)
+    voice.remove_user(event.message.sender.user_id) # type: ignore
+    voice.Sremove_user(event.message.sender.user_id) # type: ignore
     await event.message.answer("""
 📚 Помощь
 
@@ -371,8 +371,8 @@ async def cmd_learn(event: MessageCreated):
     """
 
     """
-    voice.remove_user(event.message.sender.user_id)
-    voice.Sremove_user(event.message.sender.user_id)
+    voice.remove_user(event.message.sender.user_id) # type: ignore
+    voice.Sremove_user(event.message.sender.user_id) # type: ignore
     await event.message.answer("Вы выбрали режим изучения слов")
 
 
@@ -457,13 +457,13 @@ async def cmd_practice(event: MessageCreated):
     """
 
     """
-    voice.Sremove_user(event.message.sender.user_id)
-    if voice.check_user(event.message.sender.user_id): # ignore
+    voice.Sremove_user(event.message.sender.user_id) # type: ignore
+    if voice.check_user(event.message.sender.user_id): # type: ignore
         await event.message.answer("Вы уже находитесь в режиме проверки слов")
         return
         
 
-    voice.add_user(event.message.sender.user_id) # ignore
+    voice.add_user(event.message.sender.user_id) # type: ignore
 
     await event.message.answer("Вы выбрали режим проверки слов. Бот будет отправлять вам слова, а вы должны в голосовом сообщении сказать перевод."
     "(для наилучшего качества распознавания делайте паузы во время записи соообщения)")
@@ -487,7 +487,7 @@ async def cmd_practice(event: MessageCreated):
     print(f"→ {w['translation']}")
 
 
-    voice.words[event.message.sender.user_id] = w['word']
+    voice.words[event.message.sender.user_id] = w['word'] # type: ignore
         
 
 
@@ -498,18 +498,18 @@ async def cmd_practice(event: MessageCreated):
 
 
 @dp.message_created(Command("sentence"))
-async def cmd_practice(event: MessageCreated):
+async def cmd_sentence(event: MessageCreated):
     """
 
     """
-    voice.remove_user(event.message.sender.user_id)
+    voice.remove_user(event.message.sender.user_id) # type: ignore
     
-    if voice.Scheck_user(event.message.sender.user_id): # ignore
+    if voice.Scheck_user(event.message.sender.user_id): # type: ignore
         await event.message.answer("Вы уже находитесь в режиме составления предложения")
-        returnS
+        return
         
 
-    voice.Sadd_user(event.message.sender.user_id) # ignore
+    voice.Sadd_user(event.message.sender.user_id) # type: ignore
 
     await event.message.answer("Вы выбрали режим составления предложения. Бот будет отправлять вам слова, а вы должны придумать предложение и отправить его голосовым сообщением."
     "(для наилучшего качества распознавания делайте паузы во время записи соообщения)")
@@ -526,7 +526,7 @@ async def cmd_practice(event: MessageCreated):
     print(f"→ {w['translation']}")
 
 
-    voice.words[event.message.sender.user_id] = w['word']
+    voice.words[event.message.sender.user_id] = w['word'] # type: ignore
         
 
 
@@ -550,9 +550,9 @@ async def cmd_practice(event: MessageCreated):
 
 async def download_audio_to_memory(attachment: Audio) -> io.BytesIO:
     """Скачивает аудио по payload.url в BytesIO."""
-    url = attachment.payload.url          # ← вот здесь, а не download_url
+    url = attachment.payload.url          # ← вот здесь, а не download_url # type: ignore
     async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
+        async with session.get(url) as resp: # type: ignore
             resp.raise_for_status()
             data = await resp.read()
             return io.BytesIO(data)
@@ -572,7 +572,7 @@ async def _process_voice(event: MessageCreated):
         return                                 # не наше — молча выходим
 
 
-    if not voice.check_user(event.message.sender.user_id) or not voice.Scheck_user(event.message.sender.user_id): # ignore
+    if not voice.check_user(event.message.sender.user_id) or not voice.Scheck_user(event.message.sender.user_id): # type: ignore
         await event.message.answer("Вы уже не находитесь в режиме использующем голосовые сообщения")
         return
         
@@ -603,17 +603,17 @@ async def _process_voice(event: MessageCreated):
             beam_size=5,
             vad_filter=True,        # отсекает тишину
             vad_parameters=dict(min_silence_duration_ms=500),
-            initial_prompt=voice.words[event.message.sender.user_id]
+            initial_prompt=voice.words[event.message.sender.user_id] # type: ignore
         )
 
         text = "".join(segment.text for segment in segments).strip()
 
 
-        if voice.check_user(event.message.sender.user_id): # ignore
-            if voice.words[event.message.sender.user_id] in text.lower():
-                await event.message.answer(f'Правильно! ✅ \nЭто слово "{voice.words[event.message.sender.user_id]}"')
+        if voice.check_user(event.message.sender.user_id): # type: ignore
+            if voice.words[event.message.sender.user_id] in text.lower(): # type: ignore
+                await event.message.answer(f'Правильно! ✅ \nЭто слово "{voice.words[event.message.sender.user_id]}"') # type: ignore
             else:
-                await event.message.answer(f'Неправильно! ❌ \nЭто слово "{voice.words[event.message.sender.user_id]}" \nТвой ответ: {text}')
+                await event.message.answer(f'Неправильно! ❌ \nЭто слово "{voice.words[event.message.sender.user_id]}" \nТвой ответ: {text}') # type: ignore
 
 
             w = random_word()
@@ -625,11 +625,11 @@ async def _process_voice(event: MessageCreated):
             print(f"→ {w['translation']}")
 
 
-            voice.words[event.message.sender.user_id] = w['word']
+            voice.words[event.message.sender.user_id] = w['word'] # type: ignore
 
         else:
             ## AI
-            await event.message.answer(str(ai_check.check_sentence(sentence=text, word=voice.words[event.message.sender.user_id]))
+            await event.message.answer(str(ai_check.check_sentence(sentence=text, word=voice.words[event.message.sender.user_id])) # type: ignore
 
             w = random_word()
             await event.message.answer(f"""
