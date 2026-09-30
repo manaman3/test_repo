@@ -527,13 +527,73 @@ async def handle_voice(event: MessageCreated):
 
 async def _process_voice(event: MessageCreated):
     body = event.message.body
-    if not body or not body.attachments:
-        return                                 # не наше — молча выходим
 
 
     if not voice.check_user(event.message.sender.user_id) and not voice.Scheck_user(event.message.sender.user_id): # type: ignore
         await event.message.answer("Вы уже не находитесь в режиме использующем голосовые сообщения")
         return
+
+
+
+    if not body or not body.attachments:
+        if event.message.body and event.message.body.text:
+
+    #####   
+            text = event.message.body.text.lower()
+
+
+            if voice.check_user(event.message.sender.user_id): # type: ignore
+                if voice.words[event.message.sender.user_id] in text.lower(): # type: ignore
+                    await event.message.answer(f'Правильно! ✅ \nЭто слово "{voice.words[event.message.sender.user_id]}"') # type: ignore
+                else:
+                    await event.message.answer(f'Неправильно! ❌ \nЭто слово "{voice.words[event.message.sender.user_id]}" \nТвой ответ: {text}') # type: ignore
+
+
+                w = random_word()
+                await event.message.answer(f"""
+    🔁 Следующее слово: 
+    🇷🇺 {w['translation']}
+                """)
+                print(f"{w['word']}")
+                print(f"→ {w['translation']}")
+
+
+                voice.words[event.message.sender.user_id] = w['word'] # type: ignore
+
+            else:
+                ## AI
+
+
+                result = ai_check.check_sentence(sentence=text, word=voice.words[event.message.sender.user_id]) # type: ignore
+
+
+                result = ai_check.format_result(result, text)
+
+
+                await event.message.answer(str(result))
+
+                w = random_word()
+                await event.message.answer(f"""
+    🔁 Составьте предложение с этим словом: 
+    🇷🇺 {w['word']}
+                """)
+                print(f"{w['word']}")
+                print(f"→ {w['translation']}")
+
+
+                voice.words[event.message.sender.user_id] = w['word'] # type: ignore
+
+
+
+
+
+    ######
+
+
+        return                                 # не наше — молча выходим
+
+
+
         
 
     for att in body.attachments:
