@@ -588,7 +588,15 @@ async def _process_voice(event: MessageCreated):
 
         else:
             ## AI
-            await event.message.answer(str(ai_check.check_sentence(sentence=text, word=voice.words[event.message.sender.user_id])))# type: ignore
+
+
+            result = ai_check.check_sentence(sentence=text, word=voice.words[event.message.sender.user_id])
+
+
+            result = ai_check.format_result(result, text)
+
+
+            await event.message.answer(str(result))
 
             w = random_word()
             await event.message.answer(f"""
