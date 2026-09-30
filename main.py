@@ -551,7 +551,7 @@ async def _process_voice(event: MessageCreated):
                 w = random_word()
                 await event.message.answer(f"""
 🔁 Следующее слово: 
-🇷🇺 {w['translation']}
+🇷🇺 {w['word']}
                 """)
                 print(f"{w['word']}")
                 print(f"→ {w['translation']}")
