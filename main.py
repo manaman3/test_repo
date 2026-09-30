@@ -97,8 +97,6 @@ WEBHOOK_URL = os.getenv("WEBHOOK_URL", "https://ваш-домен.com/webhook")
 # Локальный адрес и порт, который слушает сервер
 HOST = os.getenv("HOST", "0.0.0.0")
 PORT = int(os.getenv("PORT", "8080"))
-# Секретный токен (опционально, если MAX его поддерживает — защитит от левых запросов)
-WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET", "")
 
 # model_path = "./whisper_model"
 model = WhisperModel(
@@ -326,7 +324,7 @@ async def cmd_sentence(event: MessageCreated):
 
 async def download_audio_to_memory(attachment: Audio) -> io.BytesIO:
     """Скачивает аудио по payload.url в BytesIO."""
-    url = attachment.payload.url          # ← вот здесь, а не download_url # type: ignore
+    url = attachment.payload.url          # type: ignore
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp: # type: ignore
             resp.raise_for_status()
