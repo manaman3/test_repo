@@ -17,9 +17,7 @@ import aiohttp
 from faster_whisper import WhisperModel
 
 from maxapi import Bot, Dispatcher, F
-from maxapi.context import MemoryContext, State, StatesGroup
-from maxapi.filters.callback_payload import CallbackPayload
-from maxapi.filters.command import CommandStart
+from maxapi.context import MemoryContext
 from maxapi.methods.set_commands import SetCommands
 from maxapi.types import (
     BotCommand,
@@ -39,15 +37,6 @@ from maxapi.utils.inline_keyboard import InlineKeyboardBuilder
 import ai_check
 
 
-
-
-
-
-
-print("123")
-
-
-
 class Voice():
 
 
@@ -59,15 +48,7 @@ class Voice():
         # Создаём пустой словарь
         self.words = dict()
 
-        # # Добавление: ключ = id, значение = слово
-        # words[1] = "привет"
-        # words[2] = "мир"
-        # words[3] = "питон"
-
-
-
-
-        
+ 
     def check_user(self, id):
         if id in self.users:
             return True
@@ -77,27 +58,16 @@ class Voice():
         if id not in self.users:
             self.users.append(id)
 
-    
-        
-
-
-    # def remove_user(self, id):
-    #     pass
-
-
     def remove_user(self, id) -> None:
         """Удаляет пользователя из списков users и users_sent, если он там есть."""
         if id in self.users:
             self.users.remove(id)
-
-
 
     def Sremove_user(self, id) -> None:
         """Удаляет пользователя из списков users и users_sent, если он там есть."""
 
         if id in self.users_sent:
             self.users_sent.remove(id)
-
 
     def Scheck_user(self, id):
         if id in self.users_sent:
@@ -108,29 +78,16 @@ class Voice():
         if id not in self.users_sent:
             self.users_sent.append(id)
 
-    
-        
-
-
     def remove_word(self, word_id) -> None:
         """Удаляет слово из словаря по его id."""
         if word_id in self.words:
             del self.words[word_id]
 
-
-
-
-
-
 voice = Voice()
-
 
 TOKEN = os.getenv("MAX_BOT_TOKEN")
 if not TOKEN:
     raise RuntimeError("MAX_BOT_TOKEN не задан")
-
-
-
 
 # ──────────────────────────────────────────────
 # Настройки Webhook
@@ -143,44 +100,13 @@ PORT = int(os.getenv("PORT", "8080"))
 # Секретный токен (опционально, если MAX его поддерживает — защитит от левых запросов)
 WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET", "")
 
-
-
-
-# цау цау
-
 # model_path = "./whisper_model"
-# Загружаем модель один раз при старте (можно вынести в отдельный поток)
 model = WhisperModel(
     "small.en",#"large-v3",           # или "turbo", "medium" — зависит от железа
     device="cpu",        # или "cpu"
     compute_type="int8" # или "int8" для CPU
 #    download_root=model_path
 )
-
-
-# async def download_voice_to_memory(attachment: Audio) -> io.BytesIO:
-#     """Скачивает голосовое сообщение в BytesIO без сохранения на диск."""
-#     async with aiohttp.ClientSession() as session:
-#         async with session.get(attachment.download_url) as resp:
-#             resp.raise_for_status()
-#             data = await resp.read()
-#             return io.BytesIO(data)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -202,52 +128,9 @@ def random_words(n: int = 5, path: str = "words.json") -> list[dict]:
 
 w = random_word()
 
-print("ttt")
 logging.basicConfig(level=logging.INFO)
 bot = Bot(TOKEN)
 dp = Dispatcher()
-print("sss")
-
-class SchoolPayload(CallbackPayload, prefix="schoolpayload"):
-    foo: str
-    action: str
-
-
-
-
-class StudentPayload(CallbackPayload, prefix="studentpayload"):
-    bar: str
-    value: int
-
-
-
-# ──────────────────────────────────────────────
-# Ветки состояний
-# ──────────────────────────────────────────────
-class TextDialog(StatesGroup):
-    waiting_text = State()
-    confirming   = State()
-
-class VoiceDialog(StatesGroup):
-    waiting_voice = State()
-    confirming    = State()
-
-# ──────────────────────────────────────────────
-# Хелпер: пользователь уже в какой-то ветке?
-# ──────────────────────────────────────────────
-async def is_in_dialog(context: MemoryContext) -> bool:
-    """True, если пользователь уже находится внутри любой ветки."""
-    current = await context.get_state()
-    return current is not None
-
-
-
-
-
-##################################
-
-
-
 
 
 @dp.bot_started()
@@ -272,8 +155,6 @@ async def bot_started(event: BotStarted):
 
 Начни с /learn 👇
 """)
-
-
 
 @dp.message_created(Command("start"))
 async def cmd_start(event: MessageCreated):
@@ -300,12 +181,10 @@ async def cmd_start(event: MessageCreated):
 Начни с /learn 👇""")
 
 
-
-
 @dp.message_created(Command("help"))
 async def cmd_help(event: MessageCreated):
     """
-    Обработчик команды /start
+    Обработчик команды /help
     """
     voice.remove_user(event.message.sender.user_id) # type: ignore
     voice.Sremove_user(event.message.sender.user_id) # type: ignore
@@ -333,21 +212,11 @@ async def cmd_help(event: MessageCreated):
 
 Всё бесплатно.""")
 
-
-
-
-
-
 @dp.message_created(Command("learn"))
 async def cmd_learn(event: MessageCreated):
-    """
-
-    """
     voice.remove_user(event.message.sender.user_id) # type: ignore
     voice.Sremove_user(event.message.sender.user_id) # type: ignore
     await event.message.answer("Вы выбрали режим изучения слов")
-
-
     kb = InlineKeyboardBuilder()
     kb.row(
         CallbackButton(
@@ -355,8 +224,6 @@ async def cmd_learn(event: MessageCreated):
             payload="next_lesson_word",
         )
     )
-
-
     w = random_word()
     await event.message.answer(f"""
 
@@ -374,13 +241,6 @@ async def cmd_learn(event: MessageCreated):
     print(f"→ {w['translation']}")
     print(f"Пример: {w['sentence']}")
 
-        
-
-
-
-
-
-
 @dp.message_callback(F.callback.payload.startswith("next_lesson_word"))
 async def learn_callback_word(event: MessageCallback, context: MemoryContext) -> None:
     print("fewgerger")
@@ -391,8 +251,6 @@ async def learn_callback_word(event: MessageCallback, context: MemoryContext) ->
             payload="next_lesson_word",
         )
     )
-
-
     w = random_word()
     await event.edit(f"""
 
@@ -411,32 +269,15 @@ async def learn_callback_word(event: MessageCallback, context: MemoryContext) ->
     print(f"Пример: {w['sentence']}")
 
 
-
-
-
-
-
 ### practice
-
-
-
-
- 
-
 
 @dp.message_created(Command("practice"))
 async def cmd_practice(event: MessageCreated):
-    """
-
-    """
     voice.Sremove_user(event.message.sender.user_id) # type: ignore
     if voice.check_user(event.message.sender.user_id): # type: ignore
         await event.message.answer("Вы уже находитесь в режиме проверки слов")
         return
-        
-
     voice.add_user(event.message.sender.user_id) # type: ignore
-
     await event.message.answer("""✅ Режим проверки слов включён.
 
 Я буду присылать вам слова, а вы — отвечать переводом.
@@ -446,18 +287,12 @@ async def cmd_practice(event: MessageCreated):
 Распознавание занимает до 30 секунд.""")
 
 
-
-
     w = random_word()
     await event.message.answer(f"""
 
 🔁 Начинаем проверку: 
 
-🇷🇺 {w['translation']}
-
-
-
-    """)
+🇷🇺 {w['translation']}""")
     print(f"{w['word']}")
     print(f"→ {w['translation']}")
 
@@ -465,27 +300,13 @@ async def cmd_practice(event: MessageCreated):
     voice.words[event.message.sender.user_id] = w['word'] # type: ignore
         
 
-
-
-
-
-
-
-
 @dp.message_created(Command("sentence"))
 async def cmd_sentence(event: MessageCreated):
-    """
-
-    """
     voice.remove_user(event.message.sender.user_id) # type: ignore
-    
     if voice.Scheck_user(event.message.sender.user_id): # type: ignore
         await event.message.answer("Вы уже находитесь в режиме составления предложения")
         return
-        
-
     voice.Sadd_user(event.message.sender.user_id) # type: ignore
-
     await event.message.answer("""✅ Режим составления предложения включён.
 
 Я буду присылать вам слово, а вы — придумывать с ним предложение.
@@ -494,9 +315,6 @@ async def cmd_sentence(event: MessageCreated):
 🎤 Для лучшего распознавания говорите с небольшими паузами.
 Распознавание занимает до 30 секунд.""")
 
-
-
-
     w = random_word()
     await event.message.answer(f"""
 🔁 Составьте предложение с этим словом: 
@@ -504,29 +322,7 @@ async def cmd_sentence(event: MessageCreated):
             """)
     print(f"{w['word']}")
     print(f"→ {w['translation']}")
-
-
     voice.words[event.message.sender.user_id] = w['word'] # type: ignore
-        
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 async def download_audio_to_memory(attachment: Audio) -> io.BytesIO:
     """Скачивает аудио по payload.url в BytesIO."""
@@ -540,34 +336,23 @@ async def download_audio_to_memory(attachment: Audio) -> io.BytesIO:
 @dp.message_created()
 async def handle_voice(event: MessageCreated):
     """Лёгкий хендлер: сразу отвечает MAX'у 200, работа — в фоне."""
-    body = event.message.body
-    # if not body or not body.attachments:
-    #     return
     asyncio.create_task(_process_voice(event))
 
 
 async def _process_voice(event: MessageCreated):
     body = event.message.body
-
-
     if not voice.check_user(event.message.sender.user_id) and not voice.Scheck_user(event.message.sender.user_id): # type: ignore
         await event.message.answer("Вы уже не находитесь в режиме использующем голосовые сообщения и текстовые сообщения")
         return
 
-
     if not body or not body.attachments:
-        if event.message.body and event.message.body.text:
-
-    #####   
+        if event.message.body and event.message.body.text: 
             text = event.message.body.text
-
-
             if voice.check_user(event.message.sender.user_id): # type: ignore
                 if voice.words[event.message.sender.user_id] in text.lower(): # type: ignore
                     await event.message.answer(f'Правильно! ✅ \nЭто слово "{voice.words[event.message.sender.user_id]}"') # type: ignore
                 else:
                     await event.message.answer(f'Неправильно! ❌ \nЭто слово "{voice.words[event.message.sender.user_id]}" \nТвой ответ: {text}') # type: ignore
-
 
                 w = random_word()
                 await event.message.answer(f"""
@@ -604,25 +389,13 @@ async def _process_voice(event: MessageCreated):
                 voice.words[event.message.sender.user_id] = w['word'] # type: ignore
 
 
-
-
-
-    ######
-
-
-        return                                 # не наше — молча выходим
-
-
-
-        
+        return  # не наше — молча выходим
 
     for att in body.attachments:
         if not isinstance(att, Audio):
             continue
-
         try:
             buffer = await download_audio_to_memory(att)
-
 
         except Exception as e:
             logging.exception("Не удалось скачать аудио")
@@ -630,11 +403,6 @@ async def _process_voice(event: MessageCreated):
             return
 
         size = len(buffer.getvalue())
-        # await event.message.answer(f"🎤 Аудио получено: {size} байт")
-        # здесь можно отдать buffer в Whisper:
-        # segments, info = model.transcribe(buffer, ...)
-
-        # faster-whisper умеет работать с file-like объектами
         await event.message.answer(f"Начало распознавания голосового сообщения")
         segments, info = model.transcribe(
             buffer,
@@ -644,17 +412,12 @@ async def _process_voice(event: MessageCreated):
             vad_parameters=dict(min_silence_duration_ms=500),
             initial_prompt=voice.words[event.message.sender.user_id] # type: ignore
         )
-
         text = "".join(segment.text for segment in segments).strip()
-
-
         if voice.check_user(event.message.sender.user_id): # type: ignore
             if voice.words[event.message.sender.user_id] in text.lower(): # type: ignore
                 await event.message.answer(f'Правильно! ✅ \nЭто слово "{voice.words[event.message.sender.user_id]}"') # type: ignore
             else:
                 await event.message.answer(f'Неправильно! ❌ \nЭто слово "{voice.words[event.message.sender.user_id]}" \nТвой ответ: {text}') # type: ignore
-
-
             w = random_word()
             await event.message.answer(f"""
 🔁 Следующее слово: 
@@ -662,22 +425,13 @@ async def _process_voice(event: MessageCreated):
             """)
             print(f"{w['word']}")
             print(f"→ {w['translation']}")
-
-
             voice.words[event.message.sender.user_id] = w['word'] # type: ignore
 
         else:
             ## AI
-
-
             result = ai_check.check_sentence(sentence=text, word=voice.words[event.message.sender.user_id]) # type: ignore
-
-
             result = ai_check.format_result(result, text)
-
-
             await event.message.answer(str(result))
-
             w = random_word()
             await event.message.answer(f"""
 🔁 Составьте предложение с этим словом: 
@@ -685,245 +439,12 @@ async def _process_voice(event: MessageCreated):
             """)
             print(f"{w['word']}")
             print(f"→ {w['translation']}")
-
-
             voice.words[event.message.sender.user_id] = w['word'] # type: ignore
-
-
-
-
-
-
-
-
-
-        # await event.message.answer(f"📝 Распознанный текст:\n\n{text}")
         return
 
 
     # если вложение есть, но не Audio — можно тоже ответить
     await event.message.answer("Вложение не распознано как аудио или текст. Для помощи воспользуйтесь /help")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# import logging
-
-# @dp.message_created()
-# async def debug_any(event: MessageCreated):
-#     logging.info("=== DEBUG message_created ===")
-#     logging.info("body: %s", event.message.body)
-#     if event.message.body:
-#         logging.info("text: %r", getattr(event.message.body, "text", None))
-#         logging.info("attachments: %r", getattr(event.message.body, "attachments", None))
-#         atts = getattr(event.message.body, "attachments", None) or []
-#         for i, att in enumerate(atts):
-#             logging.info("att[%d] type=%s dict=%s", i, type(att).__name__, att.__dict__)
-#     logging.info("=== /DEBUG ===")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# @dp.message_created(F.message.attachments)
-# async def handle_voice(event: MessageCreated):
-#     """Обработчик голосовых и аудио-сообщений."""
-#     attachments = event.message.body.attachments
-#     if not attachments:
-#         return
-
-#     for attachment in attachments:
-#         if not isinstance(attachment, Audio):
-#             continue
-
-#         # 1. Скачиваем аудио в память (без сохранения на диск)
-#         try:
-#             audio_buffer = await download_voice_to_memory(attachment)
-#         except Exception as e:
-#             logging.error(f"Не удалось скачать аудио: {e}")
-#             await event.message.answer("❌ Не удалось скачать голосовое сообщение.")
-#             return
-
-#         # 2. Здесь можно делать что угодно с аудио:
-#         #    - отправить в Whisper для транскрипции
-#         #    - сохранить в файл
-#         #    - отправить обратно пользователю
-#         # Для примера просто сообщим, что файл получен:
-#         await event.message.answer(
-#             f"🎤 Получено аудио: {attachment.duration} сек. "
-#             f"({len(audio_buffer.getvalue())} байт)"
-#         )
-#         return
-
-#     await event.message.answer("Пожалуйста, отправьте голосовое сообщение.")
-
-
-
-
-
-
-
-
-
-
-
-
-# @dp.message_created(F.message.attachments)
-# async def handle_voice(event: MessageCreated):
-
-#     print("qqqqqqqqqq")
-#     for attachment in event.message.attachments:
-#         if not isinstance(attachment, Audio):
-#             continue
-
-#         # 1. Скачиваем в память
-#         audio_buffer = await download_voice_to_memory(attachment)
-
-#         # 2. Транскрибируем напрямую из BytesIO
-#         # faster-whisper умеет работать с file-like объектами
-#         segments, info = model.transcribe(
-#             audio_buffer,
-#             language="eu",          # можно не указывать — авто-детект
-#             beam_size=5,
-#             vad_filter=True,        # отсекает тишину
-#             vad_parameters=dict(min_silence_duration_ms=500)
-#         )
-
-#         text = "".join(segment.text for segment in segments).strip()
-
-#         await event.message.answer(f"📝 Распознанный текст:\n\n{text}")
-#         return
-
-#     await event.message.answer("Пожалуйста, отправьте голосовое сообщение.")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # ──────────────────────────────────────────────
-# # Запуск
-# # ──────────────────────────────────────────────
-# async def main():
-
-#     commands_to_set = [
-#         BotCommand(name="start",      description="🚀 Запустить бота и пройти онбординг"),
-#         BotCommand(name="learn",     description="📖 Выбрать тему для изучения"),
-#         BotCommand(name="practice",     description="🔁 Начать сессию повторения слов"),
-#         BotCommand(name="dictionary", description="📚 Мой личный словарь"),
-#         BotCommand(name="progress",   description="📊 Мой прогресс"),
-#         BotCommand(name="remind",     description="⏰ Настроить напоминания"),
-#         BotCommand(name="help",       description="❓ Помощь и список команд"),
-#     ]
-
-
-#     setter = SetCommands(bot, commands=commands_to_set)
-#     result = await setter.fetch()
-
-
-
-
-#     # await dp.start_polling(bot) # polling вместо вебхуков
-
-
-
-
-
-# # ──────────────────────────────────────────────
-# # HTTP-обработчик входящих обновлений от MAX
-# # ──────────────────────────────────────────────
-# async def handle_webhook(request: web.Request) -> web.Response:
-#     # Проверка секрета (если задан)
-#     if WEBHOOK_SECRET:
-#         if request.headers.get("X-Max-Secret") != WEBHOOK_SECRET:
-#             return web.Response(status=403)
-
-#     try:
-#         event_json = await request.json()
-#     except Exception:
-#         return web.Response(status=400)
-
-#     # Передаём событие в диспетчер — он вызовет нужный хендлер
-#     await dp.process_update_webhook(event_json, bot)
-#     return web.Response(status=200)
-
-
-# async def healthcheck(_: web.Request) -> web.Response:
-#     return web.Response(text="ok")
-
-
 
 
 async def main() -> None:
@@ -938,49 +459,11 @@ async def main() -> None:
     setter = SetCommands(bot, commands=commands_to_set)
     await setter.fetch()
 
-    # # 2. Поднимаем aiohttp-сервер
-    # app = web.Application()
-    # app.router.add_post("/webhook", handle_webhook)
-    # app.router.add_get("/health", healthcheck)
-
-    # runner = web.AppRunner(app)
-    # await runner.setup()
-    # site = web.TCPSite(runner, HOST, PORT)
-    # await site.start()
-
-    # print(f"🌐 Webhook-сервер запущен на http://{HOST}:{PORT}/webhook")
-
-    # # 3. Сообщаем MAX, куда слать обновления
-    # #    (в некоторых версиях maxapi метод может называться set_webhook / subscribe_webhook)
-    # try:
-    #     await bot.set_webhook(url=WEBHOOK_URL)
-    #     print(f"✅ Webhook зарегистрирован: {WEBHOOK_URL}")
-    # except AttributeError:
-    #     print("⚠️ Метод set_webhook не найден — зарегистрируйте URL через API MAX вручную.")
-    # except Exception as e:
-    #     print(f"⚠️ Не удалось установить webhook: {e}")
-
-    # # 4. Держим процесс живым
-    # try:
-    #     await asyncio.Event().wait()
-    # finally:
-    #     await runner.cleanup()
-
-
-
-
-# async def main():
-    # Запускает FastAPI-сервер на 0.0.0.0:8080
     await dp.handle_webhook(
         bot=bot,
         host='0.0.0.0',
-        port=8080,
-        # ssl_certfile="/certs/fullchain.pem",   # путь внутри контейнера
-        # ssl_keyfile="/certs/privkey.pem",       # путь внутри контейнера
+        port=8080
     )
-
-
-
 
 if __name__ == '__main__':
     print("подготовка к запуску")

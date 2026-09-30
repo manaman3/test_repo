@@ -1,13 +1,13 @@
 """
-Проверка предложения ученика через LLM (GenAPI, OpenAI-совместимый прокси).
+Проверка предложения ученика через LLM (OpenAI-совместимый прокси).
 
 Установка:
     pip install openai pydantic python-dotenv
 
 .env:
-    GENAPI_API_KEY=ваш_ключ
-    GENAPI_BASE_URL=https://proxy.gen-api.ru/v1
-    GENAPI_MODEL=gemini-2.5-flash-preview-04-17
+    API_KEY=ваш_ключ
+    BASE_URL=https://proxy.gen-api.ru/v1
+    MODEL=gemini-2.5-flash-preview-04-17
 """
 
 import json

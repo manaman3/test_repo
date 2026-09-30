@@ -185,7 +185,7 @@
 - **Python 3.11**
 - **MAX Bot API** (`maxapi`)
 - **faster-whisper** — локальное распознавание речи (модель `small.en`)
-- **OpenAI SDK** → GenAPI (OpenAI-совместимый прокси)
+- **OpenAI SDK** → OpenAI-совместимый прокси
 - **Pydantic**, **python-dotenv**
 - **Docker**, **Docker Compose**
 - **Nginx** + **Let's Encrypt** (Certbot)
@@ -198,7 +198,7 @@
 - VPS с Ubuntu 22.04+ (тестировалось на 24.04.2 LTS)
 - Домен, указывающий на VPS
 - Токен бота MAX
-- Ключ GenAPI (или другого OpenAI-совместимого провайдера)
+- Ключ OpenAI-совместимого провайдера
 - ≥2 ГБ swap (для faster-whisper)
 
 ---
@@ -206,8 +206,8 @@
 ## 🚀 Быстрый старт
 
 ```bash
-git clone https://github.com/<USERNAME>/<REPO>.git
-cd <REPO>
+git clone https://github.com/manaman3/hackathon_max_2026
+cd hackathon_max_2026
 cp .env.example .env
 nano .env
 docker compose up -d --build
@@ -308,8 +308,8 @@ update-ca-certificates
 ## 📂 Установка проекта
 
 ```bash
-git clone https://github.com/<USERNAME>/<REPO>.git
-cd <REPO>
+git clone https://github.com/manaman3/hackathon_max_2026
+cd hackathon_max_2026
 
 cp .env.example .env
 nano .env
@@ -368,7 +368,7 @@ docker compose stop    # только остановить
 ## 🔄 Обновление
 
 ```bash
-cd ~/<REPO>
+cd ~/hackathon_max_2026
 git pull
 docker compose up -d --build
 docker compose logs -f
