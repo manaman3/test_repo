@@ -534,9 +534,11 @@ async def _process_voice(event: MessageCreated):
         return
 
 
-
+    await event.message.answer('1')
     if not body or not body.attachments:
+        await event.message.answer('2')
         if event.message.body and event.message.body.text:
+            await event.message.answer('3')
 
     #####   
             text = event.message.body.text.lower()
