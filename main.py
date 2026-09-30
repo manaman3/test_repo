@@ -593,13 +593,14 @@ async def _process_voice(event: MessageCreated):
         # segments, info = model.transcribe(buffer, ...)
 
         # faster-whisper умеет работать с file-like объектами
-        await event.message.answer(f"Начало распознавания голосового сообщения")
+        await event.message.answer(f"Начало распознавания голосового сообщения(для наилучшего качаства распознавания делайте паузы во время записи соообщения)")
         segments, info = model.transcribe(
             buffer,
             language="en",          # можно не указывать — авто-детект
             beam_size=5,
             vad_filter=True,        # отсекает тишину
-            vad_parameters=dict(min_silence_duration_ms=500)
+            vad_parameters=dict(min_silence_duration_ms=500),
+            initial_prompt=voice.words[event.message.sender.user_id]
         )
 
         text = "".join(segment.text for segment in segments).strip()
