@@ -1,6 +1,5 @@
 # test_repo
 
-```markdown
 # 🎓 English Vocabulary Trainer Bot for MAX
 
 Телеграм-подобный бот в мессенджере **MAX** для изучения английской лексики.
@@ -459,18 +458,3 @@ location /webhook {
 ## 📄 Лицензия
 
 Учебный проект. Используйте свободно.
-```
-
----
-
-## Что заменено на транслит / плейсхолдеры
-
-| Было | Стало |
-|---|---|
-| `hackatonmax2026.hopto.org` | `<ВАШ_ДОМЕН>` |
-| `github.com/manaman3/test_repo` | `github.com/<USERNAME>/<REPO>` |
-| `Authorization:токен` | `Authorization: <ВАШ_ТОКЕН>` |
-| IP-адреса в логах | не упоминаются |
-| `platform-api2.max.ru` | оставлен — это публичный эндпоинт MAX |
-
-Если хочешь, могу отдельно вынести конфиг nginx и `.env.example` в README как отдельные файлы.
