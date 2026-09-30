@@ -380,7 +380,8 @@ docker compose up -d --build
 кладем nginx, если он занимает порты
 ```bash
 sudo systemctl stop nginx
-sudo systemctl disable nginx   # чтобы не запускался после перезагрузки ```
+sudo systemctl disable nginx   # чтобы не запускался после перезагрузки 
+```
 ---
 
 ## 🔗 Регистрация вебхука
